@@ -1,0 +1,369 @@
+/* ===== Reset básico ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    sans-serif;
+}
+
+/* ===== Fundo (mesmo estilo do sistema) ===== */
+body {
+  min-height: 100vh;
+  background-image: url("../assets/images/ciudad-de-les-artes.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: #ffffff;
+}
+
+/* Overlay escuro para contraste */
+.overlay {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  background: radial-gradient(
+      circle at top left,
+      rgba(15, 23, 42, 0.85),
+      rgba(15, 23, 42, 0.55)
+    ),
+    rgba(15, 23, 42, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+/* ===== Layout principal ===== */
+.login-container {
+  width: 100%;
+  max-width: 1120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+/* ===== Card de login (frosted glass) ===== */
+.login-card {
+  width: 100%;
+  max-width: 460px;
+  padding: 2.75rem 3rem;
+  border-radius: 28px;
+  border: 2px solid rgba(255, 255, 255, 0.22);
+  background: linear-gradient(
+      135deg,
+      rgba(15, 23, 42, 0.85),
+      rgba(15, 23, 42, 0.7)
+    );
+  backdrop-filter: blur(20px);
+  box-shadow: 0 18px 55px rgba(255, 255, 255, 0.12) !important;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.user-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  opacity: 0.7;
+}
+
+.user-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+/* Pill de estado (igual guia rápido) */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: 999px;
+  padding: 0.28rem 0.85rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.7);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #22c55e;
+}
+
+.status-text {
+  white-space: nowrap;
+}
+
+/* ===== Título e subtítulo ===== */
+.login-title h1 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.login-title p {
+  margin: 0.4rem 0 0;
+  font-size: 0.95rem;
+  opacity: 0.8;
+}
+
+/* ===== Form ===== */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.field-label {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.8rem;
+  opacity: 0.9;
+}
+
+.field-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+}
+
+.icon {
+  width: 13px;
+  height: 13px;
+  fill: #e5e7eb;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.9);
+  padding: 0.65rem 0.1rem;
+  font-size: 0.9rem;
+  color: #f9fafb;
+  background: transparent;
+  outline: none;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+input::placeholder {
+  color: rgba(148, 163, 184, 0.9);
+}
+
+input:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 1px 0 0 #38bdf8;
+}
+
+/* Botão principal */
+.btn-primary {
+  margin-top: 0.3rem;
+  width: 100%;
+  border: none;
+  border-radius: 999px;
+  padding: 0.8rem 1.2rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  background: linear-gradient(90deg, #16a34a, #22c55e);
+  color: #ffffff;
+  box-shadow: 0 12px 24px rgba(22, 163, 74, 0.5);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 30px rgba(22, 163, 74, 0.6);
+  opacity: 0.96;
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 8px 20px rgba(22, 163, 74, 0.55);
+}
+
+/* ===== Rodapé ===== */
+.login-footer {
+  font-size: 0.75rem;
+  opacity: 0.8;
+  text-align: center;
+}
+
+.login-note {
+  margin: 0;
+}
+
+/* Logo inferior */
+.brand-footer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.brand-logo {
+  font-size: 1.1rem;
+}
+
+.brand-text {
+  font-weight: 600;
+}
+
+/* ===== ESTADOS (bordas + cores) ===== */
+
+/* OPERANDO (verde) */
+.state-operando {
+  border-color: #22c55e;
+  box-shadow: 0 18px 60px rgba(22, 163, 74, 0.6);
+}
+.state-operando .status-pill {
+  background: rgba(22, 163, 74, 0.2);
+  border-color: rgba(22, 163, 74, 0.7);
+}
+.state-operando .status-dot {
+  background: #22c55e;
+}
+
+/* VACACIONES (azul) */
+.state-vacaciones {
+  border-color: #0ea5e9;
+  box-shadow: 0 18px 60px rgba(14, 165, 233, 0.6);
+}
+.state-vacaciones .status-pill {
+  background: rgba(14, 165, 233, 0.2);
+  border-color: rgba(14, 165, 233, 0.8);
+}
+.state-vacaciones .status-dot {
+  background: #0ea5e9;
+}
+
+/* RECESO (amarillo) – por si quiser usar depois */
+.state-receso {
+  border-color: #f59e0b;
+  box-shadow: 0 18px 60px rgba(245, 158, 11, 0.6);
+}
+.state-receso .status-pill {
+  background: rgba(245, 158, 11, 0.22);
+  border-color: rgba(245, 158, 11, 0.85);
+}
+.state-receso .status-dot {
+  background: #f59e0b;
+}
+
+/* TERMINADO (vermelho) – por si quiser usar depois */
+.state-terminado {
+  border-color: #ef4444;
+  box-shadow: 0 18px 60px rgba(239, 68, 68, 0.6);
+}
+.state-terminado .status-pill {
+  background: rgba(239, 68, 68, 0.22);
+  border-color: rgba(239, 68, 68, 0.85);
+}
+.state-terminado .status-dot {
+  background: #ef4444;
+}
+
+/* ===== Responsivo ===== */
+@media (max-width: 720px) {
+  .login-card {
+    padding: 2.1rem 1.7rem;
+    max-width: 100%;
+  }
+
+  .login-title h1 {
+    font-size: 1.6rem;
+  }
+
+}
+
+@media (max-width: 480px) {
+  .login-card {
+    padding: 1.9rem 1.4rem;
+    border-radius: 24px;
+  }
+
+  .login-container {
+    gap: 1.5rem;
+  }
+
+  .status-pill {
+    font-size: 0.65rem;
+    padding-inline: 0.7rem;
+  }
+
+  .user-name {
+    font-size: 0.85rem;
+  }
+}
+/* Mensagem de erro no login */
+.login-error {
+  margin-top: 0.6rem;
+  font-size: 0.8rem;
+  color: #fecaca;
+  background: rgba(239, 68, 68, 0.14);
+  border-radius: 999px;
+  padding: 0.45rem 0.9rem;
+  text-align: center;
+  border: 1px solid rgba(239, 68, 68, 0.8);
+  display: none;
+}
+
+.login-error.show {
+  display: block;
+}
+
+/* Scrollbar unificado (SistemaNow) */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #034fa7 transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #0ea5e9, #22d3ee);
+  border-radius: 999px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #38bdf8, #0ea5e9);
+}

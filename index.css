@@ -1,0 +1,362 @@
+/* ===== Reset básico ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    sans-serif;
+}
+
+/* Variáveis base (podemos reaproveitar depois em um UI global) */
+:root {
+  --ui-card-bg: rgba(15, 23, 42, 0.92);
+  --ui-card-border: rgba(148, 163, 184, 0.25);
+  --ui-card-shadow: 0 20px 60px rgba(0, 0, 0, 0.78);
+  --ui-primary: #007aff;
+  --ui-text-muted: rgba(156, 163, 175, 0.96);
+}
+
+/* Fundo geral igual às outras telas (ciudad de les artes) */
+body {
+  min-height: 100vh;
+  background-image: url("./assets/images/ciudad-de-les-artes.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: #f9fafb;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+      circle at top left,
+      rgba(15, 23, 42, 0.85),
+      rgba(15, 23, 42, 0.4)
+    );
+  z-index: -1;
+}
+
+/* Overlay */
+.overlay {
+  min-height: 100vh;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.16);
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  padding: 1.8rem 1.2rem 2.4rem;
+}
+
+/* Card principal */
+.glass-card {
+  border-radius: 28px;
+  border: 1px solid var(--ui-card-border);
+  background: var(--ui-card-bg);
+  box-shadow: var(--ui-card-shadow);
+  backdrop-filter: blur(22px);
+}
+
+/* Layout do index */
+.index-container {
+  width: 100%;
+  max-width: 1120px;
+  display: flex;
+  flex-direction: column;
+  padding: 1.9rem 2.1rem 1.6rem;
+  gap: 1.6rem;
+}
+
+/* Header */
+.index-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.index-kicker {
+  margin: 0;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: rgba(148, 163, 184, 0.96);
+}
+
+.index-title {
+  margin: 0;
+  font-size: 1.7rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.index-subtitle {
+  margin: 0.35rem 0 0;
+  font-size: 0.9rem;
+  color: var(--ui-text-muted);
+  max-width: 640px;
+}
+
+/* Corpo: steps + detail */
+.index-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.9fr);
+  gap: 1.6rem;
+}
+
+/* Steps */
+.steps-panel {
+  padding: 1.1rem 1rem;
+  border-radius: 22px;
+  background: rgba(15, 23, 42, 0.96);
+  border: 1px solid rgba(51, 65, 85, 0.7);
+}
+
+.steps-title {
+  margin: 0 0 0.8rem;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: rgba(148, 163, 184, 0.96);
+}
+
+.steps-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.step-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.55rem 0.6rem;
+  border-radius: 16px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background 0.14s ease, border-color 0.14s ease,
+    transform 0.1s ease;
+}
+
+.step-item:hover {
+  background: rgba(15, 23, 42, 0.95);
+  border-color: rgba(75, 85, 99, 0.9);
+}
+
+.step-item.active {
+  background: radial-gradient(
+      circle at top left,
+      rgba(56, 189, 248, 0.18),
+      rgba(15, 23, 42, 0.98)
+    );
+  border-color: rgba(56, 189, 248, 0.9);
+  transform: translateY(-1px);
+}
+
+.step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.9);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.step-item.active .step-number {
+  background: rgba(56, 189, 248, 0.22);
+  border-color: rgba(56, 189, 248, 0.95);
+}
+
+.step-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.step-label {
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.step-desc-short {
+  font-size: 0.78rem;
+  color: var(--ui-text-muted);
+}
+
+/* Painel de detalhe */
+.detail-panel {
+  padding: 1.1rem 1.2rem 1rem;
+  border-radius: 22px;
+  border: 1px solid rgba(51, 65, 85, 0.7);
+  background: radial-gradient(
+      circle at top left,
+      rgba(15, 23, 42, 0.96),
+      rgba(6, 8, 16, 0.96)
+    );
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.detail-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.detail-kicker {
+  margin: 0;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: rgba(148, 163, 184, 0.96);
+}
+
+.detail-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.detail-text {
+  margin: 0.3rem 0 0;
+  font-size: 0.88rem;
+  color: var(--ui-text-muted);
+}
+
+.detail-meta {
+  margin-top: 0.2rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.5fr);
+  gap: 0.9rem;
+}
+
+.meta-label {
+  margin: 0;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: rgba(148, 163, 184, 0.96);
+}
+
+.meta-value {
+  margin: 0.2rem 0 0;
+  font-size: 0.82rem;
+}
+
+/* Botão principal */
+.detail-actions {
+  margin-top: 0.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.detail-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.55rem 1.2rem;
+  border-radius: 999px;
+  background: var(--ui-primary);
+  color: #f9fafb;
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.9);
+  transition: background 0.12s ease, transform 0.1s ease,
+    box-shadow 0.12s ease;
+}
+
+.detail-cta:hover {
+  background: #0060d6;
+  transform: translateY(-1px);
+  box-shadow: 0 20px 42px rgba(15, 23, 42, 1);
+}
+
+.detail-cta:active {
+  transform: translateY(0);
+  box-shadow: 0 10px 26px rgba(15, 23, 42, 1);
+}
+
+.detail-hint {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--ui-text-muted);
+}
+
+/* Footer */
+.index-footer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: rgba(209, 213, 219, 0.96);
+}
+
+.brand-mark {
+  font-size: 1rem;
+}
+
+.brand-text {
+  font-weight: 500;
+}
+
+/* Responsivo */
+@media (max-width: 960px) {
+  .index-body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .detail-meta {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .overlay {
+    padding: 1.2rem 0.7rem 2rem;
+  }
+
+  .index-container {
+    padding: 1.4rem 1.3rem 1.2rem;
+    border-radius: 24px;
+  }
+}
+
+/* Scrollbar unificado (SistemaNow) */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #034fa7 transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #0ea5e9, #22d3ee);
+  border-radius: 999px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #38bdf8, #0ea5e9);
+}

@@ -1,0 +1,308 @@
+/* ============================================================
+   VARIABLES DE INTERFAZ (TOKENS SISTEMANOW)
+============================================================ */
+:root {
+  --ui-bg-body: #020617;
+  --ui-card-bg: rgba(15, 23, 42, 0.92);
+  --ui-card-border: rgba(148, 163, 184, 0.25);
+  --ui-card-shadow: 0 20px 60px rgba(0, 0, 0, 0.75);
+  --ui-surface-soft: rgba(255, 255, 255, 0.06);
+  --ui-text: #f8fafc;
+  --ui-text-muted: #cbd5e1;
+  --ui-accent: #0ea5e9;
+  --ui-accent-2: #22c55e;
+}
+
+/* ============================================================
+   RESET GLOBAL + SCROLLBAR (DISCRETA)
+============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(30, 41, 59, 0.8) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: rgba(30, 41, 59, 0.9);
+  border-radius: 999px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(55, 65, 81, 0.95);
+}
+
+/* ============================================================
+   FONDO CORPORATIVO — IGUAL A PANTALLA PRINCIPAL
+============================================================ */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  color: var(--ui-text);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background-image: url("../assets/images/ciudad-de-les-artes.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  position: relative;
+}
+
+/* Overlay Apple-style (sem camada escura sólida) */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+      circle at top left,
+      rgba(15, 23, 42, 0.85),
+      rgba(15, 23, 42, 0.40)
+    );
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ============================================================
+   CONTENEDOR PRINCIPAL
+============================================================ */
+.page-shell {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 32px 20px 40px 120px; /* espacio para navbar lateral */
+}
+
+@media (max-width: 900px) {
+  .page-shell {
+    padding: 20px 14px 110px 14px; /* espacio navbar móvil */
+  }
+}
+
+.content {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* ============================================================
+   CARDS VIDRIO FOSCO (UNIFICADO SISTEMANOW)
+============================================================ */
+.glass-card {
+  border-radius: 24px;
+  border: 1px solid var(--ui-card-border);
+  background: var(--ui-card-bg);
+  backdrop-filter: blur(20px);
+  box-shadow: var(--ui-card-shadow);
+  padding: 18px 20px;
+}
+
+/* ============================================================
+   HEADER DEL PANEL
+============================================================ */
+.header-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.header-kicker {
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--ui-text-muted);
+}
+
+.header-title {
+  margin: 0;
+  font-size: 28px;
+  letter-spacing: -0.02em;
+}
+
+.header-subtitle {
+  margin-top: 4px;
+  color: var(--ui-text-muted);
+  font-size: 14px;
+  max-width: 760px;
+}
+
+/* ============================================================
+   PILLS / ESTADOS
+============================================================ */
+.pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.pill-toggle {
+  padding: 0;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.pill-toggle.is-active {
+  border-color: rgba(14, 165, 233, 0.45);
+}
+
+/* ============================================================
+   FILTROS
+============================================================ */
+.filters-card {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  align-items: end;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field label {
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ui-text-muted);
+}
+
+.field input,
+.field select {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 16px;
+  border: 1px solid var(--ui-card-border);
+  background: var(--ui-surface-soft);
+  color: var(--ui-text);
+}
+
+/* ============================================================
+   TABELA DE USUARIOS
+============================================================ */
+.table-card {
+  padding: 0;
+  overflow: hidden;
+}
+
+.table-actions {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.table-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* SCROLL SUAVE */
+.usuarios-table-scroll {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Tabela */
+.usuarios-table {
+  width: 100%;
+  min-width: 1100px;
+  border-collapse: collapse;
+}
+
+.usuarios-table thead th {
+  padding: 12px 14px;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: var(--ui-text-muted);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.usuarios-table tbody td {
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.usuarios-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* Select de ações */
+.actions-select {
+  border-radius: 12px;
+  border: 1px solid var(--ui-card-border);
+  background: var(--ui-surface-soft);
+  color: var(--ui-text);
+  padding: 10px 12px;
+}
+
+/* ============================================================
+   FOOTER DA TABELA (PAGINACAO)
+============================================================ */
+.table-footer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.pager {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pager button {
+  border-radius: 12px;
+  border: 1px solid var(--ui-card-border);
+  background: var(--ui-surface-soft);
+  color: var(--ui-text);
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.pager button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ============================================================
+   CHECKBOXES
+============================================================ */
+.selection-checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--ui-accent-2);
+}

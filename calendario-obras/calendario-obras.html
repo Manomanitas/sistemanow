@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Calendario de obras · Sistema Manomanitas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CSS específico desta tela -->
+    <link rel="stylesheet" href="calendario-obras.css" />
+  </head>
+  <body>
+    <div class="overlay">
+      <main class="dashboard-container">
+        <section class="glass-card obras-card">
+          <!-- HEADER -->
+          <header class="card-header obras-header">
+            <div>
+              <h1 class="card-title">Calendario de obras</h1>
+              <p class="card-subtitle">
+                Gestiona todas las obras programadas, en curso y finalizadas sobre una vista mensual.
+              </p>
+            </div>
+            <div class="obras-controls">
+              <label class="obras-select-group">
+                <span class="obras-select-label">Año</span>
+                <select id="yearSelect" class="obras-select"></select>
+              </label>
+
+              <label class="obras-select-group">
+                <span class="obras-select-label">Mes</span>
+                <select id="monthSelect" class="obras-select"></select>
+              </label>
+            </div>
+          </header>
+
+          <!-- WRAPPER GRID + LEGENDA -->
+          <div class="obras-main-layout">
+            <!-- CALENDARIO -->
+            <div class="obras-calendar">
+              <!-- Cabeçalho dias da semana -->
+              <div class="obras-calendar-row obras-daynames-row">
+                <div class="obras-dayname">Domingo</div>
+                <div class="obras-dayname">Lunes</div>
+                <div class="obras-dayname">Martes</div>
+                <div class="obras-dayname">Miércoles</div>
+                <div class="obras-dayname">Jueves</div>
+                <div class="obras-dayname">Viernes</div>
+                <div class="obras-dayname">Sábado</div>
+              </div>
+
+              <!-- Grid preenchido via JS -->
+              <div
+                class="obras-calendar-grid"
+                id="obrasCalendarGrid"
+                aria-label="Calendario mensual de obras"
+              ></div>
+            </div>
+
+            <!-- LEGENDA / ESTADOS + BOTÃO CREAR OBRA -->
+            <aside class="obras-legend">
+                <!-- BOTÓN LATERAL CREAR OBRA -->
+              <button type="button" class="obras-crear-btn" id="btnCrearObraSide">
+                Crear obra
+              </button>
+              <h2 class="obras-legend-title">Estados de obra</h2>
+              <ul class="obras-legend-list">
+                <li>
+                  <span class="obras-legend-dot obras-dot-programada"></span>
+                  Programada
+                </li>
+                <li>
+                  <span class="obras-legend-dot obras-dot-en-curso"></span>
+                  En curso
+                </li>
+                <li>
+                  <span class="obras-legend-dot obras-dot-en-cobro"></span>
+                  En cobro
+                </li>
+                <li>
+                  <span class="obras-legend-dot obras-dot-facturada"></span>
+                  Facturada
+                </li>
+                <li>
+                  <span class="obras-legend-dot obras-dot-garantia"></span>
+                  En garantía
+                </li>
+                <li>
+                  <span class="obras-legend-dot obras-dot-cancelada"></span>
+                  Cancelada
+                </li>
+              </ul>
+
+              <p class="obras-legend-note">
+                Haz clic sobre un día para ver un resumen rápido de las obras
+                planificadas en esa fecha (en futuras versiones podremos abrir el detalle completo).
+              </p>
+            </aside>
+          </div>
+
+          <footer class="obras-footer">
+            <p class="obras-footer-text">
+              Vista mensual pensada para coordinación de equipos y planificación
+              de agenda de obra.
+            </p>
+          </footer>
+
+          <!-- MODAL · CREAR OBRA -->
+          <div
+            class="obra-modal-backdrop"
+            id="obraModalBackdrop"
+            aria-hidden="true"
+          >
+            <div
+              class="obra-modal"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="obraModalTitle"
+            >
+              <header class="obra-modal-header">
+                <div>
+                  <h2 class="obra-modal-title" id="obraModalTitle">
+                    Crear nueva obra
+                  </h2>
+                  <p class="obra-modal-subtitle">
+                    Define los datos básicos de la obra y, si lo deseas, añade
+                    una orden de trabajo o presupuesto.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  class="obra-modal-close"
+                  id="obraModalCloseBtn"
+                >
+                  ✕
+                </button>
+              </header>
+
+              <!-- Indicador de pasos -->
+              <div class="obra-steps-indicator">
+                <div
+                  class="obra-step-pill obra-step-pill-active"
+                  data-step="1"
+                >
+                  <span class="obra-step-number">1</span>
+                  <span class="obra-step-label">Datos de la obra</span>
+                </div>
+                <div class="obra-step-pill" data-step="2">
+                  <span class="obra-step-number">2</span>
+                  <span class="obra-step-label">Orden / presupuesto</span>
+                </div>
+              </div>
+
+              <!-- CONTENIDO PASO 1 -->
+              <div class="obra-step" data-step="1">
+                <!-- Cliente / empresa -->
+                <div class="obra-field-group">
+                  <label class="obra-label">
+                    Nombre del Cliente / Empresa
+                    <span class="obra-required">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="obraCliente"
+                    class="obra-input"
+                    placeholder="Ej. Comunidad de propietarios Calle Mayor 21"
+                  />
+                  <p class="obra-hint">
+                    Este dato es obligatorio para identificar la obra.
+                  </p>
+                </div>
+
+                <!-- Datos de la obra -->
+                <div class="obra-field-grid">
+                  <div class="obra-field-group">
+                    <label class="obra-label">
+                      Dirección de la obra (Google Maps)
+                      <span class="obra-required">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="obraDireccion"
+                      class="obra-input"
+                      placeholder="Ej. Calle Mayor 21, Valencia · Enlace de Google Maps"
+                    />
+                  </div>
+                  <div class="obra-field-group">
+                    <label class="obra-label">
+                      Contacto del cliente
+                      <span class="obra-required">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="obraContactoCliente"
+                      class="obra-input"
+                      placeholder="Nombre y teléfono / email de contacto"
+                    />
+                  </div>
+                </div>
+
+                <!-- Accesos -->
+                <div class="obra-section-title">Accesos</div>
+                <div class="obra-field-grid">
+                  <div class="obra-field-group">
+                    <label class="obra-label">Tipo de acceso</label>
+                    <input
+                      type="text"
+                      id="accesoTipo"
+                      class="obra-input"
+                      placeholder="Llaves, cesta elevadora, andamios, comunidad, etc."
+                    />
+                  </div>
+                  <div class="obra-field-group">
+                    <label class="obra-label">ID / Referencia del acceso</label>
+                    <input
+                      type="text"
+                      id="accesoId"
+                      class="obra-input"
+                      placeholder="Código interno, nº reserva, etc."
+                    />
+                  </div>
+                </div>
+
+                <div class="obra-field-grid">
+                  <div class="obra-field-group">
+                    <label class="obra-label">Fecha inicio acceso</label>
+                    <input
+                      type="date"
+                      id="accesoFechaInicio"
+                      class="obra-input"
+                    />
+                  </div>
+                  <div class="obra-field-group">
+                    <label class="obra-label">Fecha fin acceso</label>
+                    <input
+                      type="date"
+                      id="accesoFechaFin"
+                      class="obra-input"
+                    />
+                  </div>
+                </div>
+
+                <div class="obra-field-group">
+                  <label class="obra-label">Contacto del acceso</label>
+                  <input
+                    type="text"
+                    id="accesoContacto"
+                    class="obra-input"
+                    placeholder="Vecino que abre, empresa de accesos, etc."
+                  />
+                </div>
+
+                <div class="obra-field-group">
+                  <label class="obra-label">Estado del acceso</label>
+                  <div class="obra-radio-row">
+                    <label class="obra-radio">
+                      <input
+                        type="radio"
+                        name="accesoEstado"
+                        value="solicitado"
+                        checked
+                      />
+                      <span>Solicitado / confirmado</span>
+                    </label>
+                    <label class="obra-radio">
+                      <input
+                        type="radio"
+                        name="accesoEstado"
+                        value="pendiente"
+                      />
+                      <span>Pendiente de solicitar</span>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Documentación / costes vinculados -->
+                <div class="obra-section-title">
+                  Documentación / costes vinculados
+                </div>
+
+                <div class="obra-doc-upload">
+                  <!-- Tags / tipos de coste -->
+                  <div class="obra-checkbox-grid">
+                    <label class="obra-checkbox">
+                      <input type="checkbox" id="docFacturasCompra" />
+                      <span>Facturas de compra</span>
+                    </label>
+                    <label class="obra-checkbox">
+                      <input type="checkbox" id="docMateriales" />
+                      <span>Materiales</span>
+                    </label>
+                    <label class="obra-checkbox">
+                      <input type="checkbox" id="docParking" />
+                      <span>Parking</span>
+                    </label>
+                    <label class="obra-checkbox">
+                      <input type="checkbox" id="docHoteles" />
+                      <span>Hoteles</span>
+                    </label>
+                  </div>
+
+                  <!-- Área de subida de archivos -->
+                  <div class="obra-upload-area">
+                    <input
+                      type="file"
+                      id="obraDocsInput"
+                      class="obra-file-input"
+                      multiple
+                      hidden
+                    />
+
+                    <button
+                      type="button"
+                      class="obra-btn-outline"
+                      id="obraDocsBtn"
+                    >
+                      Añadir archivos
+                    </button>
+
+                    <p class="obra-hint">
+                      Puedes subir tantos archivos como necesites: facturas,
+                      albaranes, presupuestos, reservas de parking, hoteles,
+                      etc.
+                    </p>
+
+                    <ul class="obra-doc-list" id="obraDocsList"></ul>
+                  </div>
+                </div>
+              </div>
+              <!-- fecha .obra-step data-step="1" -->
+
+              <!-- CONTENIDO PASO 2 -->
+              <div class="obra-step obra-step-hidden" data-step="2">
+                <div class="obra-section-title">
+                  Orden de trabajo / presupuesto
+                </div>
+
+                <div class="obra-field-group">
+                  <label class="obra-label">Asignar orden ya existente</label>
+                  <button
+                    type="button"
+                    class="obra-btn-outline obra-btn-small"
+                  >
+                    Buscar / asignar OT existente
+                  </button>
+                  <p class="obra-hint">
+                    En futuras versiones podrás buscar y vincular una OT ya
+                    creada en el sistema.
+                  </p>
+                </div>
+
+                <div class="obra-field-group">
+                  <label class="obra-label">
+                    Tarea principal / título de la orden
+                  </label>
+                  <input
+                    type="text"
+                    id="otTitulo"
+                    class="obra-input"
+                    placeholder="Ej. Reparación de filtraciones en cubierta patio interior"
+                  />
+                </div>
+
+                <div class="obra-field-group">
+                  <label class="obra-label">Todas las tareas a realizar</label>
+                  <textarea
+                    id="otTareas"
+                    class="obra-textarea"
+                    rows="3"
+                    placeholder="Lista de tareas, fases y observaciones técnicas"
+                  ></textarea>
+                </div>
+
+                <div class="obra-field-grid">
+                  <div class="obra-field-group">
+                    <label class="obra-label">Técnicos asignados</label>
+                    <input
+                      type="text"
+                      id="otTecnicos"
+                      class="obra-input"
+                      placeholder="Ej. Eduardo, Guilherme, Maicon..."
+                    />
+                  </div>
+                  <div class="obra-field-group">
+                    <label class="obra-label">Contacto de la orden</label>
+                    <input
+                      type="text"
+                      id="otContacto"
+                      class="obra-input"
+                      placeholder="Persona que solicitó el presupuesto / orden"
+                    />
+                  </div>
+                </div>
+
+                <div class="obra-field-group">
+                  <label class="obra-label">
+                    Número de presupuesto (si existe)
+                  </label>
+                  <input
+                    type="text"
+                    id="otNumeroPresupuesto"
+                    class="obra-input"
+                    placeholder="Referencia interna o nº de presupuesto"
+                  />
+                </div>
+              </div>
+
+              <!-- FOOTER BOTONES -->
+              <footer class="obra-modal-footer">
+                <div class="obra-footer-left">
+                  <button
+                    type="button"
+                    class="obra-btn-ghost"
+                    id="obraBtnCancelar"
+                  >
+                    Cancelar
+                  </button>
+                </div>
+                <div class="obra-footer-right">
+                  <button
+                    type="button"
+                    class="obra-btn-secondary"
+                    id="obraBtnCrearSimple"
+                  >
+                    Crear obra
+                  </button>
+                  <button
+                    type="button"
+                    class="obra-btn-primary"
+                    id="obraBtnCrearConOT"
+                  >
+                    Crear obra y añadir OT/presupuesto
+                  </button>
+                </div>
+              </footer>
+            </div>
+          </div>
+          <!-- FIM MODAL -->
+        </section>
+      </main>
+    </div>
+
+    <!-- JS específico desta tela -->
+    <script src="calendario-obras.js"></script>
+  </body>
+</html>

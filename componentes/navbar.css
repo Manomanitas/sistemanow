@@ -1,0 +1,1085 @@
+:root {
+  --nav-bg: #111318;
+  --nav-bg-alt: #151923;
+  --nav-bg-soft: #191e27;
+  --nav-accent: #16a34a;
+  --nav-accent-soft: rgba(22, 163, 74, 0.15);
+  --nav-text: #f9fafb;
+  --nav-muted: #9ca3af;
+  --nav-border: #1f2933;
+
+  /* Cores mobile bottom-nav */
+  --mobile-bg: #ffffff;
+  --mobile-icon: #6b7280;
+  --mobile-icon-active: #6366f1;
+  --mobile-label: #6b7280;
+  --mobile-label-active: #6366f1;
+}
+
+/* Override extra padding bottom to manter conteúdo visível sob a navbar fixa */
+@media (max-width: 768px) {
+  body.page-with-nav {
+    padding-bottom: calc(120px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+}
+
+/* Reserva espaço global para a barra fixa não cobrir conteúdo */
+body.page-with-nav {
+  padding-bottom: 120px;
+}
+
+/* Shell geral (desktop) */
+
+.nav-shell {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 95px;
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  pointer-events: none;
+  transition: width 0.25s ease;
+}
+
+.nav-shell.open {
+  width: 260px;
+}
+
+/* Card principal da sidebar (desktop) */
+.nav-inner {
+  pointer-events: auto;
+  width: 100%;
+  max-width: 260px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(145deg, #0c0f16, #151923);
+  border-radius: 24px;
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(15, 23, 42, 0.9);
+  padding: 10px;
+  overflow: hidden;
+}
+
+/* HEADER */
+
+.nav-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 4px 6px 10px;
+}
+
+.nav-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 30% 20%, #bbf7d0, #16a34a);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  color: #ecfdf5;
+  font-size: 14px;
+  font-weight: 700;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.35);
+  flex-shrink: 0;
+}
+
+.nav-logo span {
+  transform: translateY(0.5px);
+}
+
+.nav-header-text {
+  display: none;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.nav-app-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--nav-text);
+  white-space: nowrap;
+}
+
+.nav-app-subtitle {
+  font-size: 11px;
+  color: var(--nav-muted);
+  white-space: nowrap;
+}
+
+/* Botão toggle (hamburger) */
+
+.nav-toggle {
+  margin-left: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border: 1px solid rgba(248, 250, 252, 0.9);
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+
+.nav-toggle:hover {
+  background: rgba(15, 23, 42, 0.9);
+  border-color: rgba(248, 250, 252, 1);
+  transform: translateY(-1px);
+}
+
+.nav-toggle-bar,
+.nav-toggle-bar::before,
+.nav-toggle-bar::after {
+  content: "";
+  display: block;
+  width: 14px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--nav-text);
+  position: relative;
+}
+
+.nav-toggle-bar::before,
+.nav-toggle-bar::after {
+  position: absolute;
+  left: 0;
+}
+
+.nav-toggle-bar::before {
+  top: -4px;
+}
+
+.nav-toggle-bar::after {
+  top: 4px;
+}
+
+/* SEARCH (desktop) */
+
+.nav-search {
+  margin: 0 6px 12px;
+  padding: 0 2px;
+  height: 42px;
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.9);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-inline: 10px;
+  border: 1px solid rgba(31, 41, 55, 0.8);
+  transition: background 0.2s ease, border-color 0.2s ease,
+    opacity 0.2s ease, max-height 0.25s ease, margin 0.25s ease;
+}
+
+.nav-search-icon {
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--nav-muted);
+  flex-shrink: 0;
+}
+
+.nav-search input {
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 100%;
+  font-size: 13px;
+  color: var(--nav-text);
+}
+
+.nav-search input::placeholder {
+  color: var(--nav-muted);
+}
+
+/* BLOCO CENTRAL – ÍCONES PRINCIPAIS (desktop) */
+
+.nav-center {
+  margin-left: 10px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.nav-links {
+  list-style: none;
+  margin: 0;
+  padding: 0 4px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-height: 100%;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+/* esconder scrollbar padrão */
+.nav-links::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+/* ITEM BASE */
+
+.nav-item {
+  border-radius: 14px;
+  padding: 6px 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--nav-muted);
+  font-size: 13px;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  position: relative;
+  transition:
+    background 0.18s ease,
+    color 0.18s ease,
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.nav-item:hover {
+  background: rgba(15, 23, 42, 0.95);
+  color: var(--nav-text);
+  transform: translateY(-1px);
+}
+
+/* ÍCONE */
+
+.nav-icon-pill {
+  margin-left: 10px;
+  width: 44px;
+  height: 44px;
+  border-radius: 16px;
+  background: var(--nav-bg-alt);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: inset 0 1px 0 rgba(148, 163, 184, 0.1);
+}
+
+.nav-svg {
+  width: 22px;
+  height: 22px;
+  display: block;
+  color: var(--nav-muted);
+}
+
+/* LABEL */
+
+.nav-label {
+  white-space: nowrap;
+  color: inherit;
+  display: inline-block;
+}
+
+/* ATIVO – desktop: só pill verde + ícone branco */
+
+.nav-item.is-active .nav-icon-pill {
+  background: var(--nav-accent);
+}
+
+.nav-item.is-active .nav-svg {
+  color: #ecfdf5;
+}
+
+/* BLOCO INFERIOR – HOME + USUÁRIO (desktop) */
+
+.nav-bottom {
+  margin-top: auto;
+  padding: 4px 4px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nav-home {
+  width: 100%;
+}
+
+/* FOOTER / USER – card do técnico reorganizado */
+
+.nav-footer {
+  width: 100%;
+  margin-top: 2px;
+  padding: 8px 10px;
+  border-radius: 16px;
+  background: rgba(5, 8, 22, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.75),
+    0 0 0 1px rgba(15, 23, 42, 0.85);
+}
+
+.nav-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 30% 20%, #fd611f, #df4a0a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fefefe;
+  flex-shrink: 0;
+}
+
+.nav-footer-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-width: 0;
+}
+
+.nav-user-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--nav-text);
+}
+
+.nav-user-role {
+  font-size: 11px;
+  color: var(--nav-muted);
+}
+
+/* pill OPERANDO mais compacto */
+.nav-footer ui-pill {
+  margin-top: 4px;
+  transform: scale(0.9);
+  transform-origin: left center;
+}
+
+/* === ESTADO FECHADO (COLAPSADO) – DESKTOP === */
+
+.nav-shell:not(.open) .nav-inner {
+  align-items: center;
+  width: 100%;
+}
+
+.nav-shell:not(.open) .nav-header-text,
+.nav-shell:not(.open) .nav-search,
+.nav-shell:not(.open) .nav-label,
+.nav-shell:not(.open) .nav-footer-meta,
+.nav-shell:not(.open) .nav-footer ui-pill {
+  opacity: 0;
+  max-height: 0;
+  width: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.nav-shell:not(.open) .nav-header {
+  justify-content: center;
+  width: 100%;
+}
+
+.nav-shell:not(.open) .nav-toggle {
+  margin: 0 auto;
+}
+
+.nav-shell:not(.open) .nav-links,
+.nav-shell:not(.open) .nav-bottom {
+  align-items: center;
+  padding-inline: 0;
+}
+
+.nav-shell:not(.open) .nav-item,
+.nav-shell:not(.open) .nav-home {
+  justify-content: center;
+  padding: 0;
+  width: 48px;
+  margin: 0 auto;
+}
+
+.nav-shell:not(.open) .nav-item.is-active {
+  background: transparent;
+  box-shadow: none;
+}
+
+.nav-shell:not(.open) .nav-item.is-active .nav-icon-pill {
+  background: var(--nav-accent);
+}
+
+.nav-shell:not(.open) .nav-footer {
+  background: transparent;
+  box-shadow: none;
+  padding-inline: 0;
+  justify-content: center;
+}
+
+/* SCROLLBAR leve (quando aberta) */
+
+.nav-links::-webkit-scrollbar {
+  width: 6px;
+}
+
+.nav-links::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.nav-links::-webkit-scrollbar-thumb {
+  background: rgba(31, 41, 55, 0.9);
+  border-radius: 999px;
+}
+
+/* ================================
+   MOBILE – BOTTOM NAVBAR iOS STYLE
+   ================================ */
+/* ================================
+   MOBILE – BOTTOM NAVBAR iOS STYLE
+   ================================ */
+/* ======================
+   TOKENS DE COR
+   ====================== */
+:root {
+  --nav-bg: #111318;
+  --nav-bg-alt: #151923;
+  --nav-bg-soft: #191e27;
+  --nav-accent: #16a34a;
+  --nav-accent-soft: rgba(22, 163, 74, 0.15);
+  --nav-text: #f9fafb;
+  --nav-muted: #9ca3af;
+  --nav-border: #1f2933;
+
+  /* Mobile bottom-nav */
+  --mobile-bg: #111827;
+  --mobile-icon: #9ca3af;
+  --mobile-icon-active: #ffffff;
+  --mobile-pill-bg: #2563eb;
+}
+
+/* Box sizing global para evitar overflow estranho */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  overflow-x: hidden;
+}
+
+/* ======================
+   DESKTOP – SIDEBAR
+   ====================== */
+
+.nav-shell {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 95px;
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  pointer-events: none;
+  transition: width 0.25s ease;
+}
+
+.nav-shell.open {
+  width: 260px;
+}
+
+.nav-inner {
+  pointer-events: auto;
+  width: 100%;
+  max-width: 260px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(145deg, #0c0f16, #151923);
+  border-radius: 24px;
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(15, 23, 42, 0.9);
+  padding: 10px;
+  overflow: hidden;
+}
+
+/* HEADER */
+
+.nav-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 4px 6px 10px;
+}
+
+.nav-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 30% 20%, #bbf7d0, #16a34a);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  color: #ecfdf5;
+  font-size: 14px;
+  font-weight: 700;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.35);
+  flex-shrink: 0;
+}
+
+.nav-logo span {
+  transform: translateY(0.5px);
+}
+
+.nav-header-text {
+  display: none;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.nav-app-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--nav-text);
+  white-space: nowrap;
+}
+
+.nav-app-subtitle {
+  font-size: 11px;
+  color: var(--nav-muted);
+  white-space: nowrap;
+}
+
+/* Botão toggle (hamburger) */
+
+.nav-toggle {
+  margin-left: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border: 1px solid rgba(248, 250, 252, 0.9);
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+
+.nav-toggle:hover {
+  background: rgba(15, 23, 42, 0.9);
+  border-color: rgba(248, 250, 252, 1);
+  transform: translateY(-1px);
+}
+
+.nav-toggle-bar,
+.nav-toggle-bar::before,
+.nav-toggle-bar::after {
+  content: "";
+  display: block;
+  width: 14px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--nav-text);
+  position: relative;
+}
+
+.nav-toggle-bar::before,
+.nav-toggle-bar::after {
+  position: absolute;
+  left: 0;
+}
+
+.nav-toggle-bar::before {
+  top: -4px;
+}
+
+.nav-toggle-bar::after {
+  top: 4px;
+}
+
+/* SEARCH (desktop) */
+
+.nav-search {
+  margin: 0 6px 12px;
+  padding: 0 2px;
+  height: 42px;
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.9);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-inline: 10px;
+  border: 1px solid rgba(31, 41, 55, 0.8);
+  transition: background 0.2s ease, border-color 0.2s ease,
+    opacity 0.2s ease, max-height 0.25s ease, margin 0.25s ease;
+}
+
+.nav-search-icon {
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--nav-muted);
+  flex-shrink: 0;
+}
+
+.nav-search input {
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 100%;
+  font-size: 13px;
+  color: var(--nav-text);
+}
+
+.nav-search input::placeholder {
+  color: var(--nav-muted);
+}
+
+/* BLOCO CENTRAL – ÍCONES PRINCIPAIS (desktop) */
+
+.nav-center {
+  margin-left: 10px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.nav-links {
+  list-style: none;
+  margin: 0;
+  padding: 0 4px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 100%;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+/* esconder scrollbar padrão */
+.nav-links::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+/* ITEM BASE */
+
+.nav-item {
+  border-radius: 14px;
+  padding: 6px 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--nav-muted);
+  font-size: 13px;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  position: relative;
+  transition:
+    background 0.18s ease,
+    color 0.18s ease,
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.nav-item:hover {
+  background: rgba(15, 23, 42, 0.95);
+  color: var(--nav-text);
+  transform: translateY(-1px);
+}
+
+/* ÍCONE */
+
+.nav-icon-pill {
+  margin-left: 10px;
+  width: 44px;
+  height: 44px;
+  border-radius: 16px;
+  background: var(--nav-bg-alt);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: inset 0 1px 0 rgba(148, 163, 184, 0.1);
+}
+
+.nav-svg {
+  width: 22px;
+  height: 22px;
+  display: block;
+  color: var(--nav-muted);
+}
+
+/* LABEL */
+
+.nav-label {
+  white-space: nowrap;
+  color: inherit;
+}
+
+/* ATIVO – desktop */
+
+.nav-item.is-active .nav-icon-pill {
+  background: var(--nav-accent);
+}
+
+.nav-item.is-active .nav-svg {
+  color: #ecfdf5;
+}
+
+/* BLOCO INFERIOR – HOME + USUÁRIO (desktop) */
+
+.nav-bottom {
+  margin-top: auto;
+  padding: 4px 4px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nav-home {
+  width: 100%;
+}
+
+/* FOOTER / USER – card do técnico */
+
+.nav-footer {
+  width: 100%;
+  margin-top: 2px;
+  padding: 8px 10px;
+  border-radius: 16px;
+  background: rgba(5, 8, 22, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.75),
+    0 0 0 1px rgba(15, 23, 42, 0.85);
+}
+
+.nav-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 30% 20%, #fd611f, #df4a0a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fefefe;
+  flex-shrink: 0;
+}
+
+.nav-footer-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-width: 0;
+}
+
+.nav-user-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--nav-text);
+}
+
+.nav-user-role {
+  font-size: 11px;
+  color: var(--nav-muted);
+}
+
+.nav-footer ui-pill {
+  margin-top: 4px;
+  transform: scale(0.9);
+  transform-origin: left center;
+}
+
+/* ESTADO FECHADO – DESKTOP */
+
+.nav-shell:not(.open) .nav-inner {
+  align-items: center;
+  width: 100%;
+}
+
+.nav-shell:not(.open) .nav-header-text,
+.nav-shell:not(.open) .nav-search,
+.nav-shell:not(.open) .nav-label,
+.nav-shell:not(.open) .nav-footer-meta,
+.nav-shell:not(.open) .nav-footer ui-pill {
+  opacity: 0;
+  max-height: 0;
+  width: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.nav-shell:not(.open) .nav-header {
+  justify-content: center;
+  width: 100%;
+}
+
+.nav-shell:not(.open) .nav-toggle {
+  margin: 0 auto;
+}
+
+.nav-shell:not(.open) .nav-links,
+.nav-shell:not(.open) .nav-bottom {
+  align-items: center;
+  padding-inline: 0;
+}
+
+.nav-shell:not(.open) .nav-item,
+.nav-shell:not(.open) .nav-home {
+  justify-content: center;
+  padding: 0;
+  width: 48px;
+  margin: 0 auto;
+}
+
+.nav-shell:not(.open) .nav-item.is-active {
+  background: transparent;
+  box-shadow: none;
+}
+
+.nav-shell:not(.open) .nav-item.is-active .nav-icon-pill {
+  background: var(--nav-accent);
+}
+
+.nav-shell:not(.open) .nav-footer {
+  background: transparent;
+  box-shadow: none;
+  padding-inline: 0;
+  justify-content: center;
+}
+
+/* SCROLLBAR leve (desktop) */
+
+.nav-links::-webkit-scrollbar {
+  width: 6px;
+}
+
+.nav-links::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.nav-links::-webkit-scrollbar-thumb {
+  background: rgba(31, 41, 55, 0.9);
+  border-radius: 999px;
+}
+
+/* ================================
+   MOBILE – BOTTOM NAV TIPO PILL
+   ================================ */
+@media (max-width: 768px) {
+
+  /* Barra fixa em baixo */
+  .nav-shell {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: auto;
+    padding: 10px 12px;
+    pointer-events: none;
+    background: transparent;
+    z-index: 50;
+  }
+
+  /* Home indicator iOS */
+  .nav-shell::after {
+    content: "";
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90px;
+    height: 4px;
+    border-radius: 999px;
+    background: #d1d5db;
+  }
+
+  /* Card interno = barra escura arredondada
+     → sombra bem sutil agora */
+  .nav-inner {
+    pointer-events: auto;
+    height: 72px;
+    max-width: 100%;
+    border-radius: 24px;
+    background: linear-gradient(135deg, #020617, #111827);
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.35); /* sombra suave */
+    padding: 10px 12px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  /* Esconde header, busca, footer no mobile */
+  .nav-header,
+  .nav-search,
+  .nav-bottom,
+  .nav-footer {
+    display: none;
+  }
+
+  .nav-center {
+    margin-left: 0;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Lista em linha + scroll horizontal */
+  .nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0 4px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 6px;                  /* ÍCONES MAIS JUNTOS */
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x;
+    scrollbar-width: thin;
+  }
+
+  .nav-links::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .nav-links::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .nav-links::-webkit-scrollbar-thumb {
+    background: #4b5563;
+    border-radius: 999px;
+  }
+
+  /* Cada item = pill (só ativo fica azul) */
+  .nav-item {
+    flex: 0 0 auto;
+    height: 46px;
+    padding: 0 12px;
+    border-radius: 999px;
+    background: transparent;
+    box-shadow: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: var(--mobile-icon);
+    font-size: 13px;
+    cursor: pointer;
+    text-align: center;
+    width: auto;               /* override do desktop */
+    transform: none;
+  }
+
+  .nav-item:hover {
+    background: rgba(148, 163, 184, 0.08);
+    transform: none;
+  }
+
+  /* ÍCONE MAIOR APENAS NO MOBILE */
+  .nav-icon-pill {
+    margin: 0;
+    width: 32px;               /* antes 26px */
+    height: 32px;              /* antes 26px */
+    border-radius: 999px;
+    background: transparent;
+    box-shadow: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .nav-svg {
+    width: 26px;               /* antes ~22px */
+    height: 26px;
+    color: var(--mobile-icon);
+  }
+
+  /* Label escondida por padrão */
+  .nav-label {
+    display: none;
+    white-space: nowrap;
+    font-size: 13px;
+  }
+
+  /* ITEM ATIVO = pill azul com ícone + texto branco */
+  .nav-item.is-active {
+    background: var(--mobile-pill-bg);
+    color: #ffffff;
+    box-shadow: 0 8px 18px rgba(37, 99, 235, 0.45);
+    padding: 0 16px;           /* pill um pouco maior só no ativo */
+  }
+
+  .nav-item.is-active .nav-svg {
+    color: #ffffff;
+  }
+
+  .nav-item.is-active .nav-label {
+    display: block;
+  }
+
+  .nav-item.is-active::before {
+    content: none;
+  }
+
+  .nav-shell:not(.open) .nav-home {
+    display: none;
+  }
+
+  body.page-with-nav {
+    padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px));
+  }
+}

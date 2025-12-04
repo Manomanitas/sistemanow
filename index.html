@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>INDEX · SistemaNow / Manomanitas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div class="overlay">
+      <main class="index-container glass-card">
+        <header class="index-header">
+          <div>
+            <p class="index-kicker">Punto de partida · Frontend</p>
+            <h1 class="index-title">Entorno de diseño del sistema</h1>
+            <p class="index-subtitle">
+              Usa esta pantalla como guía rápida para entender la estructura de
+              carpetas y las páginas clave del proyecto. Haz clic en cada paso
+              para ver una breve explicación y abrir la pantalla correspondiente.
+            </p>
+          </div>
+        </header>
+
+        <section class="index-body">
+          <!-- Lista de pasos -->
+          <aside class="steps-panel">
+            <h2 class="steps-title">Pasos recomendados</h2>
+            <ul class="steps-list">
+              <li class="step-item active" data-step="guia">
+                <span class="step-number">01</span>
+                <div class="step-text">
+                  <span class="step-label">Guía de estilo</span>
+                  <span class="step-desc-short">
+                    Componentes base, colores y estados.
+                  </span>
+                </div>
+              </li>
+
+              <li class="step-item" data-step="login">
+                <span class="step-number">02</span>
+                <div class="step-text">
+                  <span class="step-label">Login de técnicos</span>
+                  <span class="step-desc-short">
+                    Pantalla de acceso al sistema.
+                  </span>
+                </div>
+              </li>
+
+              <li class="step-item" data-step="fichajes">
+                <span class="step-number">03</span>
+                <div class="step-text">
+                  <span class="step-label">Estado de los fichajes</span>
+                  <span class="step-desc-short">
+                    Flujo de fichaje y estados del técnico.
+                  </span>
+                </div>
+              </li>
+
+              <li class="step-item" data-step="principal">
+                <span class="step-number">04</span>
+                <div class="step-text">
+                  <span class="step-label">Pantalla principal</span>
+                  <span class="step-desc-short">
+                    Vista general con fichajes, accesos y calendario.
+                  </span>
+                </div>
+              </li>
+
+              <li class="step-item" data-step="obras">
+                <span class="step-number">05</span>
+                <div class="step-text">
+                  <span class="step-label">Gestión de Obras</span>
+                  <span class="step-desc-short">
+                    Flujo completo de gestión de Obras.
+                  </span>
+                </div>
+              </li>
+              <li class="step-item" data-step="orden">
+                <span class="step-number">06</span>
+                <div class="step-text">
+                  <span class="step-label">Gestión de Una Orden de Trabajo</span>
+                  <span class="step-desc-short">
+                    Flujo completo de gestión del órden.                   
+                  </span>
+                </div>
+              </li>
+            </ul>
+          </aside>
+
+          <!-- Explicación + botón -->
+          <section class="detail-panel">
+            <header class="detail-header">
+              <p class="detail-kicker" id="detailKicker">
+                Paso 01 · Guía de estilo
+              </p>
+              <h2 class="detail-title" id="detailTitle">
+                Revisa primero la guía rápida de diseño
+              </h2>
+            </header>
+
+            <p class="detail-text" id="detailText">
+              En la guía de estilo encontrarás los componentes base (cards,
+              avatares, estados, pills, botones) y los colores oficiales del
+              sistema. Esta pantalla sirve como referencia visual para mantener
+              todas las demás vistas coherentes (login, fichajes, panel
+              principal, etc.).
+            </p>
+
+            <div class="detail-meta">
+              <div>
+                <p class="meta-label">Ruta del archivo</p>
+                <p class="meta-value" id="detailPath">
+                  /guia-de-estilo/guia-rapido-designer.html
+                </p>
+              </div>
+              <div>
+                <p class="meta-label">Objetivo</p>
+                <p class="meta-value" id="detailGoal">
+                  Alinear el frontend con la misma base visual.
+                </p>
+              </div>
+            </div>
+
+            <div class="detail-actions">
+              <a
+                id="detailButton"
+                class="detail-cta"
+                href="../guia-de-estilo/guia-rapido-designer.html"
+              >
+                Abrir guía de estilo
+              </a>
+              <p class="detail-hint">
+                Sugerencia: ten esta guía abierta en una pestaña mientras
+                desarrollas las demás pantallas.
+              </p>
+            </div>
+          </section>
+        </section>
+        <footer class="index-footer">
+          <span class="brand-text">SistemaNow · manomanitas.es</span>
+        </footer>
+      </main>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>

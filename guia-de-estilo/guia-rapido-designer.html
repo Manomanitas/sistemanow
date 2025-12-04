@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Previsualización · Estados + Guía de estilo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+        background: #020617;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+          sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      class="min-h-screen w-full bg-[url('../assets/images/ciudad-de-les-artes.png')] bg-cover bg-center"
+    >
+      <div
+        class="min-h-screen w-full bg-black/70 flex items-center justify-center px-4 py-8"
+      >
+        <div class="w-full max-w-5xl space-y-6 text-white">
+          <!-- Título general -->
+          <div>
+            <div
+              class="text-[11px] uppercase tracking-[0.22em] text-white/60"
+            >
+              SistemaNow · Previsualización de estados
+            </div>
+            <h1 class="text-2xl md:text-3xl font-semibold mt-1">
+              Paleta de estados (servicios y técnicos)
+            </h1>
+            <p class="text-sm text-white/70 mt-1">
+              Vista rápida de cómo quedarán los chips, tarjetas y botones usando
+              la paleta estándar de colores.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <!-- TARJETA: ESTADOS DE SERVICIO -->
+            <div
+              class="rounded-2xl border border-white/15 bg-slate-900/70 backdrop-blur-2xl shadow-[0_14px_40px_rgba(0,0,0,0.65)] p-4"
+            >
+              <div class="flex items-center justify-between mb-3 gap-3">
+                <div>
+                  <div
+                    class="text-[11px] uppercase tracking-[0.18em] text-white/60"
+                  >
+                    Estados de servicio
+                  </div>
+                  <div class="text-sm text-white/80">
+                    “Nuevo, Aceptado, Cancelado, Citado...”
+                  </div>
+                </div>
+                <!-- Botón de ejemplo (sin sombra) -->
+                <div class="flex flex-col items-end gap-2">
+                  <button
+                    class="rounded-full px-4 py-2 text-[11px] font-semibold bg-[#007AFF] hover:bg-[#0060d6] text-white"
+                  >
+                    Botón primario
+                  </button>
+                </div>
+              </div>
+
+              <div
+                class="mt-3 grid grid-cols-1 gap-2 text-[11px] md:text-[12px]"
+              >
+                <!-- NUEVO -->
+                <div class="flex items-center justify-between gap-2">
+                  <span class="text-white/70">Nuevo</span>
+                  <span
+                    class="inline-flex items-center gap-2 px-3 py-[6px] rounded-full bg-sky-500/20 text-sky-100"
+                  >
+                    <span
+                      class="h-2.5 w-2.5 rounded-full bg-sky-400"
+                    ></span>
+                    NUEVO
+                  </span>
+                </div>
+
+                <!-- ACEPTADO (verde más claro) -->
+                <div class="flex items-center justify-between gap-2">
+                  <span class="text-white/70">Aceptado</span>
+                  <span
+                    class="inline-flex items-center gap-2 px-3 py-[6px] rounded-full bg-emerald-300/25 text-emerald-100"
+                  >
+                    <span
+                      class="h-2.5 w-2.5 rounded-full bg-emerald-300"
+                    ></span>
+                    ACEPTADO
+                  </span>
+                </div>
+
+                <!-- FINALIZADO (verde mais forte) -->
+                <div class="flex items-center justify-between gap-2">
+                  <span class="text-white/70">Finalizado</span>
+                  <span
+                    class="inline-flex items-center gap-2 px-3 py-[6px] rounded-full bg-emerald-600/30 text-emerald-100"
+                  >
+                    <span
+                      class="h-2.5 w-2.5 rounded-full bg-emerald-500"
+                    ></span>
+                    FINALIZADO
+                  </span>
+                </div>
+
+                <!-- CANCELADO -->
+                <div class="flex items-center justify-between gap-2">
+                  <span class="text-white/70">Cancelado</span>
+                  <span
+                    class="inline-flex items-center gap-2 px-3 py-[6px] rounded-full bg-red-500/20 text-red-100"
+                  >
+                    <span
+                      class="h-2.5 w-2.5 rounded-full bg-red-400"
+                    ></span>
+                    CANCELADO
+                  </span>
+                </div>
+
+                <!-- CITADO -->
+                <div class="flex items-center justify-between gap-2">
+                  <span class="text-white/70">Citado</span>
+                  <span
+                    class="inline-flex items-center gap-2 px-3 py-[6px] rounded-full bg-amber-500/20 text-amber-100"
+                  >
+                    <span
+                      class="h-2.5 w-2.5 rounded-full bg-amber-400"
+                    ></span>
+                    CITADO
+                  </span>
+                </div>
+
+                <!-- GESTIÓN DE OFICINA -->
+                <div class="flex items-center justify-between gap-2">
+                  <span class="text-white/70">Gestión de oficina</span>
+                  <span
+                    class="inline-flex items-center gap-2 px-3 py-[6px] rounded-full bg-indigo-500/20 text-indigo-100"
+                  >
+                    <span
+                      class="h-2.5 w-2.5 rounded-full bg-indigo-400"
+                    ></span>
+                    GESTIÓN DE OFICINA
+                  </span>
+                </div>
+
+                <!-- ESTADO DE COBRO -->
+                <div class="flex items-center justify-between gap-2">
+                  <span class="text-white/70">Estado de cobro</span>
+                  <span
+                    class="inline-flex items-center gap-2 px-3 py-[6px] rounded-full bg-purple-500/20 text-purple-100"
+                  >
+                    <span
+                      class="h-2.5 w-2.5 rounded-full bg-purple-400"
+                    ></span>
+                    ESTADO DE COBRO
+                  </span>
+                </div>
+
+                <!-- MOROSO -->
+                <div class="flex items-center justify-between gap-2">
+                  <span class="text-white/70">Moroso</span>
+                  <span
+                    class="inline-flex items-center gap-2 px-3 py-[6px] rounded-full bg-red-600/30 text-red-200"
+                  >
+                    <span
+                      class="h-2.5 w-2.5 rounded-full bg-red-600"
+                    ></span>
+                    MOROSO
+                  </span>
+                </div>
+
+                <!-- GARANTÍA -->
+                <div class="flex items-center justify-between gap-2">
+                  <span class="text-white/70">Garantía</span>
+                  <span
+                    class="inline-flex items-center gap-2 px-3 py-[6px] rounded-full bg-cyan-500/20 text-cyan-100"
+                  >
+                    <span
+                      class="h-2.5 w-2.5 rounded-full bg-cyan-400"
+                    ></span>
+                    GARANTÍA
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- TARJETA: ESTADO DEL TÉCNICO -->
+            <div
+              class="rounded-2xl border border-white/15 bg-slate-900/70 backdrop-blur-2xl shadow-[0_14px_40px_rgba(0,0,0,0.65)] p-4"
+            >
+              <div class="flex items-center justify-between mb-3">
+                <div>
+                  <div
+                    class="text-[11px] uppercase tracking-[0.18em] text-white/60"
+                  >
+                    Estado del técnico
+                  </div>
+                  <div class="text-sm text-white/80">
+                    Avatar + indicador de estado
+                  </div>
+                </div>
+                <!-- Icono de ejemplo (sin sombra) -->
+                <button
+                  class="h-9 w-9 rounded-full bg-white/10 border border-white/20 text-sm hover:bg-white/20 flex items-center justify-center"
+                >
+                  ⚙️
+                </button>
+              </div>
+
+              <div class="space-y-3 mt-3">
+                <!-- OPERANDO -->
+                <div class="flex items-center justify-between gap-3">
+                  <div class="flex items-center gap-3">
+                    <!-- Avatar -->
+                    <div class="relative">
+                      <div
+                        class="h-10 w-10 rounded-full grid place-items-center text-xs font-semibold text-white border border-white/20"
+                        style="background-color:#FF611A;"
+                      >
+                        JC
+                      </div>
+                      <span
+                        class="h-3 w-3 rounded-full border-2 border-[#020617] absolute -bottom-1 right-0"
+                        style="background-color:#22c55e;"
+                      ></span>
+                    </div>
+                    <div class="text-xs">
+                      <div class="text-white font-semibold">JORGE COY</div>
+                      <div class="text-white/60 text-[11px]">
+                        Técnico · Operando
+                      </div>
+                    </div>
+                  </div>
+                  <span
+                    class="inline-flex items-center gap-2 px-3 py-[6px] rounded-full bg-emerald-500/20 text-emerald-100 text-[11px]"
+                  >
+                    <span
+                      class="h-2.5 w-2.5 rounded-full bg-emerald-400"
+                    ></span>
+                    OPERANDO
+                  </span>
+                </div>
+
+                <!-- RECESO -->
+                <div class="flex items-center justify-between gap-3">
+                  <div class="flex items-center gap-3">
+                    <div class="relative">
+                      <div
+                        class="h-10 w-10 rounded-full grid place-items-center text-xs font-semibold text-white border border-white/20"
+                        style="background-color:#FF611A;"
+                      >
+                        LR
+                      </div>
+                      <span
+                        class="h-3 w-3 rounded-full border-2 border-[#020617] absolute -bottom-1 right-0"
+                        style="background-color:#facc15;"
+                      ></span>
+                    </div>
+                    <div class="text-xs">
+                      <div class="text-white font-semibold">LUIS RAMOS</div>
+                      <div class="text-white/60 text-[11px]">
+                        Técnico · Receso
+                      </div>
+                    </div>
+                  </div>
+                  <span
+                    class="inline-flex items-center gap-2 px-3 py-[6px] rounded-full bg-amber-500/20 text-amber-100 text-[11px]"
+                  >
+                    <span
+                      class="h-2.5 w-2.5 rounded-full bg-amber-400"
+                    ></span>
+                    RECESO
+                  </span>
+                </div>
+
+                <!-- AUSENTE (rojo, estilo moroso) -->
+                <div class="flex items-center justify-between gap-3">
+                  <div class="flex items-center gap-3">
+                    <div class="relative">
+                      <div
+                        class="h-10 w-10 rounded-full grid place-items-center text-xs font-semibold text-white border border-white/20"
+                        style="background-color:#FF611A;"
+                      >
+                        AS
+                      </div>
+                      <span
+                        class="h-3 w-3 rounded-full border-2 border-[#020617] absolute -bottom-1 right-0"
+                        style="background-color:#dc2626;"
+                      ></span>
+                    </div>
+                    <div class="text-xs">
+                      <div class="text-white font-semibold">
+                        ALFONSO SÁNCHEZ
+                      </div>
+                      <div class="text-white/60 text-[11px]">
+                        Técnico · Ausente
+                      </div>
+                    </div>
+                  </div>
+                  <span
+                    class="inline-flex items-center gap-2 px-3 py-[6px] rounded-full bg-red-600/30 text-red-200 text-[11px]"
+                  >
+                    <span
+                      class="h-2.5 w-2.5 rounded-full bg-red-600"
+                    ></span>
+                    AUSENTE
+                  </span>
+                </div>
+
+                <!-- VACACIONES / AUSENCIA (azul) -->
+                <div class="flex items-center justify-between gap-3">
+                  <div class="flex items-center gap-3">
+                    <div class="relative">
+                      <div
+                        class="h-10 w-10 rounded-full grid place-items-center text-xs font-semibold text-white border border-white/20"
+                        style="background-color:#FF611A;"
+                      >
+                        EG
+                      </div>
+                      <span
+                        class="h-3 w-3 rounded-full border-2 border-[#020617] absolute -bottom-1 right-0"
+                        style="background-color:#3b82f6;"
+                      ></span>
+                    </div>
+                    <div class="text-xs">
+                      <div class="text-white font-semibold">
+                        ENEIAS GABRIEL
+                      </div>
+                      <div class="text-white/60 text-[11px]">
+                        Vacaciones / Ausencia
+                      </div>
+                    </div>
+                  </div>
+                  <span
+                    class="inline-flex items-center gap-2 px-3 py-[6px] rounded-full bg-blue-500/20 text-blue-100 text-[11px]"
+                  >
+                    <span
+                      class="h-2.5 w-2.5 rounded-full bg-blue-400"
+                    ></span>
+                    VACACIONES
+                  </span>
+                </div>
+
+                <!-- BLOQUE RESUMEN: SIN FICHAR / NO HA FICHADO / BAJA MÉDICA -->
+                <div
+                  class="mt-4 border-t border-white/10 pt-3 space-y-2 text-[11px]"
+                >
+                  <div class="flex items-center justify-between">
+                    <span class="text-white/70">SIN FICHAR</span>
+                    <span
+                      class="inline-flex items-center gap-2 px-3 py-[4px] rounded-full bg-gray-400/20 text-gray-200"
+                    >
+                      <span
+                        class="h-2.5 w-2.5 rounded-full bg-gray-400"
+                      ></span>
+                      SIN FICHAR
+                    </span>
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <span class="text-white/70">NO HA FICHADO</span>
+                    <span
+                      class="inline-flex items-center gap-2 px-3 py-[4px] rounded-full bg-gray-600/20 text-gray-300"
+                    >
+                      <span
+                        class="h-2.5 w-2.5 rounded-full bg-gray-600"
+                      ></span>
+                      NO HA FICHADO
+                    </span>
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <span class="text-white/70">BAJA MÉDICA</span>
+                    <span
+                      class="inline-flex items-center gap-2 px-3 py-[4px] rounded-full bg-violet-500/20 text-violet-100"
+                    >
+                      <span
+                        class="h-2.5 w-2.5 rounded-full bg-violet-400"
+                      ></span>
+                      BAJA MÉDICA
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TARJETA: GUÍA RÁPIDA DE ESTILO -->
+          <div
+            class="rounded-2xl border border-white/15 bg-slate-900/80 backdrop-blur-2xl shadow-[0_14px_40px_rgba(0,0,0,0.7)] p-4 md:p-5"
+          >
+            <div
+              class="flex flex-col md:flex-row md:items-start md:justify-between gap-4"
+            >
+              <div class="space-y-2">
+                <div
+                  class="text-[11px] uppercase tracking-[0.18em] text-white/60"
+                >
+                  Guía rápida de estilo · SistemaNow
+                </div>
+                <div class="text-sm text-white/90 font-semibold">
+                  Reglas base para mantener el mismo diseño en todas las
+                  pantallas.
+                </div>
+                <p class="text-[12px] text-white/65">
+                  Usa estas referencias como “manual” para tarjetas, botones,
+                  estados y tipografía. El objetivo es que todo el sistema se vea
+                  coherente, limpio y estilo iOS / Apple.
+                </p>
+              </div>
+
+              <!-- Pequeño resumen visual de tokens -->
+              <div class="grid grid-cols-2 gap-3 text-[11px]">
+                <div>
+                  <div class="text-white/60 mb-1">Radio de las tarjetas</div>
+                  <div
+                    class="h-10 w-full rounded-2xl border border-white/20 bg-white/5"
+                  ></div>
+                  <div class="mt-1 text-white/50">
+                    <code>rounded-2xl</code> ≈ 16–18 px
+                  </div>
+                </div>
+                <div>
+                  <div class="text-white/60 mb-1">Color primario</div>
+                  <div
+                    class="h-10 w-full rounded-xl"
+                    style="background-color:#007AFF;"
+                  ></div>
+                  <div class="mt-1 text-white/50">
+                    <code>#007AFF</code> (botones, focos)
+                  </div>
+                </div>
+                <div>
+                  <div class="text-white/60 mb-1">Fondo de tarjetas</div>
+                  <div
+                    class="h-10 w-full rounded-2xl border border-white/20 bg-slate-900/70"
+                  ></div>
+                  <div class="mt-1 text-white/50">
+                    <code>bg-slate-900/70</code> + <code>backdrop-blur-2xl</code>
+                  </div>
+                </div>
+                <div>
+                  <div class="text-white/60 mb-1">Avatar técnicos</div>
+                  <div
+                    class="h-10 w-10 rounded-full mx-auto grid place-items-center text-[11px] font-semibold text-white border border-white/20"
+                    style="background-color:#FF611A;"
+                  >
+                    JC
+                  </div>
+                  <div class="mt-1 text-center text-white/50">
+                    Fondo: <code>#FF611A</code>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4 text-[11px] md:text-[12px]"
+            >
+              <!-- Columna 1: Bordes y tarjetas -->
+              <div class="space-y-2">
+                <div class="font-semibold text-white/90">
+                  1. Tarjetas y bordes
+                </div>
+                <ul class="list-disc list-inside space-y-1 text-white/70">
+                  <li>
+                    Todas las tarjetas principales usan
+                    <code>rounded-2xl</code>.
+                  </li>
+                  <li>
+                    Bordes sutiles:
+                    <code>border border-white/15</code>.
+                  </li>
+                  <li>
+                    Fondo “cristal”:
+                    <code>bg-slate-900/70</code> o
+                    <code>bg-slate-900/80</code>.
+                  </li>
+                  <li>
+                    Efecto vidrio:
+                    <code>backdrop-blur-2xl</code> (≈ 18–20 px de blur).
+                  </li>
+                  <li>
+                    Sombras suaves sólo en tarjetas,
+                    <strong>no</strong> en botones.
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Columna 2: Colores y tipografía -->
+              <div class="space-y-2">
+                <div class="font-semibold text-white/90">
+                  2. Colores y tipografía
+                </div>
+                <ul class="list-disc list-inside space-y-1 text-white/70">
+                  <li>
+                    Fondo base:
+                    <code>#020617</code> (muy oscuro, estilo panel Apple).
+                  </li>
+                  <li>
+                    Texto principal:
+                    <code>text-white</code> /
+                    <code>text-white/90</code>.
+                  </li>
+                  <li>
+                    Texto secundario:
+                    <code>text-white/60</code> o
+                    <code>text-white/70</code>.
+                  </li>
+                  <li>
+                    Tipografía:
+                    <code>system-ui, -apple-system, "SF Pro Text"</code>.
+                  </li>
+                  <li>
+                    Colores de estado siempre con transparencias:
+                    <code>/20</code>, <code>/25</code>, <code>/30</code>.
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Columna 3: Botones y estados -->
+              <div class="space-y-2">
+                <div class="font-semibold text-white/90">
+                  3. Botones y estados
+                </div>
+                <ul class="list-disc list-inside space-y-1 text-white/70">
+                  <li>
+                    Botón primario:
+                    <code>bg-[#007AFF]</code> +
+                    <code>hover:bg-[#0060d6]</code>.
+                  </li>
+                  <li>
+                    Botones secundarios:
+                    <code>bg-white/10</code> +
+                    <code>border border-white/20</code>.
+                  </li>
+                  <li>
+                    Estados de servicio y técnico en
+                    <strong>chips redondos</strong>:
+                    <code>rounded-full</code>.
+                  </li>
+                  <li>
+                    Siempre usar “bolita” de color (dot) a la izquierda del texto
+                    para estados.
+                  </li>
+                  <li>
+                    Títulos pequeños en mayúsculas:
+                    <code>text-[11px]</code> +
+                    <code>tracking-[0.18em]</code>.
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="mt-4 text-[11px] text-white/55">
+              Siempre que se cree una pantalla nueva, seguir estas reglas:
+              misma tipografía, mismos radios, mismos colores y misma lógica de
+              estados. Así todo el sistema se siente como una sola aplicación,
+              coherente y profesional.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

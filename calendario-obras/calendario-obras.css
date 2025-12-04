@@ -1,0 +1,729 @@
+/* ===== Reset básico ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    sans-serif;
+}
+
+/* ===== Fundo estilo SistemaNow ===== */
+body {
+  min-height: 100vh;
+  background-image: url("../assets/images/ciudad-de-les-artes.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: #f9fafb;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+      circle at top left,
+      rgba(15, 23, 42, 0.85),
+      rgba(15, 23, 42, 0.4)
+    );
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Overlay principal */
+.overlay {
+  min-height: 100vh;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.15);
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  padding: 1.8rem 1.2rem 2.8rem;
+  overflow-y: auto;
+}
+
+/* Container */
+.dashboard-container {
+  width: 100%;
+  max-width: 1280px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Card principal de vidro fosco */
+.glass-card {
+  margin: 0 auto;
+  width: 100%;
+  border-radius: 26px;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  background: rgba(15, 23, 42, 0.94);
+  backdrop-filter: blur(22px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.78);
+  padding: 1.8rem 2rem 1.9rem;
+}
+
+/* Header */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.6rem;
+  margin-bottom: 1.2rem;
+}
+
+.card-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 650;
+}
+
+.card-subtitle {
+  margin: 0.4rem 0 0;
+  font-size: 0.9rem;
+  color: rgba(209, 213, 219, 0.9);
+}
+
+/* Controles (ano / mês / hoje) */
+.obras-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.obras-select-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: rgba(148, 163, 184, 0.9);
+}
+
+.obras-select {
+  background: rgba(15, 23, 42, 0.72);
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.75);
+  color: #e5e7eb;
+  padding: 0.3rem 0.95rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  min-width: 120px;
+}
+
+.obras-select:hover {
+  border-color: rgba(56, 189, 248, 0.95);
+}
+
+/* Layout principal: calendário + legenda */
+.obras-main-layout {
+  margin-top: 0.6rem;
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(260px, 1fr);
+  gap: 1.5rem;
+}
+
+/* Calendário */
+.obras-calendar {
+  width: 100%;
+}
+
+.obras-calendar-row {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+.obras-daynames-row {
+  margin-bottom: 0.35rem;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: rgba(148, 163, 184, 0.92);
+}
+
+.obras-dayname {
+  text-align: center;
+}
+
+/* Grid de dias */
+.obras-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  grid-auto-rows: 110px;
+  gap: 0.3rem;
+}
+
+/* Card de dia */
+.obras-day-cell {
+  border-radius: 18px;
+  border: 1px solid rgba(51, 65, 85, 0.95);
+  background: radial-gradient(
+      circle at top left,
+      rgba(15, 23, 42, 0.96),
+      rgba(6, 10, 20, 0.98)
+    );
+  padding: 0.35rem 0.45rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.obras-day-cell-muted {
+  background: rgba(3, 7, 18, 0.78);
+  border-style: dashed;
+  opacity: 0.6;
+}
+
+.obras-day-number {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: rgba(209, 213, 219, 0.96);
+}
+
+/* Estado "Hoje" */
+.obras-day-today {
+  box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.75);
+}
+
+/* Lista de obras do dia */
+.obras-day-list {
+  margin-top: 0.15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.18rem;
+}
+
+/* Cada obra no dia */
+.obras-day-item {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.7rem;
+  color: rgba(229, 231, 235, 0.95);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Bloquinho de cor à esquerda da obra */
+.obras-state-block {
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+}
+
+/* Cores por estado */
+.obras-state-programada {
+  background: #22d3ee; /* cyan */
+}
+.obras-state-en-curso {
+  background: #22c55e; /* verde */
+}
+.obras-state-en-cobro {
+  background: #f97316; /* laranja */
+}
+.obras-state-facturada {
+  background: #0ea5e9; /* azul claro */
+}
+.obras-state-garantia {
+  background: #a855f7; /* roxo */
+}
+.obras-state-cancelada {
+  background: #ef4444; /* vermelho */
+}
+
+/* ===== LEGENDA ===== */
+.obras-legend {
+  align-self: flex-start;
+  padding: 0.6rem 0 0;
+}
+
+.obras-legend-title {
+  margin: 0 0 0.6rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.obras-legend-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  color: rgba(209, 213, 219, 0.94);
+}
+
+.obras-legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  margin-right: 0.4rem;
+  display: inline-block;
+}
+
+.obras-dot-programada {
+  background: #22d3ee;
+}
+.obras-dot-en-curso {
+  background: #22c55e;
+}
+.obras-dot-en-cobro {
+  background: #f97316;
+}
+.obras-dot-facturada {
+  background: #0ea5e9;
+}
+.obras-dot-garantia {
+  background: #a855f7;
+}
+.obras-dot-cancelada {
+  background: #ef4444;
+}
+
+.obras-legend-note {
+  margin-top: 0.9rem;
+  font-size: 0.78rem;
+  color: rgba(148, 163, 184, 0.96);
+}
+
+/* Botón lateral CREAR OBRA */
+.obras-crear-btn {
+  margin-top: 1.2rem;
+  width: 100%;
+  border-radius: 999px;
+  padding: 0.65rem 1rem;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  background: rgba(15, 23, 42, 0.96);
+  backdrop-filter: blur(18px);
+  color: #e5e7eb;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: 0.2s ease;
+  margin-bottom: 20px;
+}
+
+.obras-crear-btn:hover {
+  border-color: rgba(56, 189, 248, 0.8);
+  color: #fff;
+  background: rgba(25, 35, 56, 0.96);
+}
+
+/* Footer */
+.obras-footer {
+  margin-top: 1.4rem;
+}
+
+.obras-footer-text {
+  margin: 0;
+  font-size: 0.78rem;
+  color: rgba(148, 163, 184, 0.96);
+}
+
+/* Responsivo */
+@media (max-width: 1024px) {
+  .obras-main-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .obras-legend {
+    border-top: 1px solid rgba(30, 64, 175, 0.6);
+    margin-top: 1rem;
+    padding-top: 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .overlay {
+    padding: 1.2rem 0.8rem 2rem;
+  }
+  .glass-card {
+    padding: 1.4rem 1.2rem 1.6rem;
+    border-radius: 22px;
+  }
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .obras-controls {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+  .obras-calendar-grid {
+    grid-auto-rows: 95px;
+  }
+}
+
+/* ============ MODAL CREAR OBRA ============ */
+
+.obra-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.78);
+  backdrop-filter: blur(18px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 60;
+}
+
+.obra-modal-backdrop.is-open {
+  display: flex;
+}
+
+.obra-modal {
+  width: 100%;
+  max-width: 920px;
+  max-height: 90vh;
+  border-radius: 24px;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  background: radial-gradient(
+      circle at top left,
+      rgba(15, 23, 42, 0.98),
+      rgba(3, 7, 18, 0.98)
+    );
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.85);
+  padding: 1.4rem 1.6rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  overflow: hidden;
+}
+
+.obra-modal-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.4rem;
+  align-items: flex-start;
+}
+
+.obra-modal-title {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 650;
+}
+
+.obra-modal-subtitle {
+  margin: 0.3rem 0 0;
+  font-size: 0.85rem;
+  color: rgba(209, 213, 219, 0.92);
+}
+
+.obra-modal-close {
+  border: none;
+  background: transparent;
+  color: rgba(148, 163, 184, 0.9);
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* Steps indicator */
+.obra-steps-indicator {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 0.4rem;
+}
+
+.obra-step-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.28rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid rgba(55, 65, 81, 0.9);
+  background: rgba(15, 23, 42, 0.9);
+  font-size: 0.72rem;
+  color: rgba(148, 163, 184, 0.95);
+}
+
+.obra-step-pill-active {
+  border-color: rgba(56, 189, 248, 0.95);
+  color: #e5f4ff;
+}
+
+.obra-step-number {
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+}
+
+/* Conteúdo passos */
+.obra-step {
+  margin-top: 0.4rem;
+  padding-right: 0.3rem;
+  overflow-y: auto;
+  max-height: 52vh;
+}
+
+.obra-step-hidden {
+  display: none;
+}
+
+.obra-section-title {
+  margin-top: 0.7rem;
+  margin-bottom: 0.35rem;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: rgba(148, 163, 184, 0.95);
+}
+
+/* Campos */
+.obra-field-group {
+  margin-top: 0.55rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.obra-field-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.obra-label {
+  font-size: 0.8rem;
+  color: rgba(209, 213, 219, 0.96);
+}
+
+.obra-required {
+  color: #f97316;
+  margin-left: 2px;
+}
+
+.obra-input,
+.obra-textarea {
+  border-radius: 13px;
+  border: 1px solid rgba(55, 65, 81, 0.9);
+  background: rgba(15, 23, 42, 0.9);
+  color: #f9fafb;
+  padding: 0.5rem 0.8rem;
+  font-size: 0.86rem;
+  outline: none;
+}
+
+.obra-input:focus,
+.obra-textarea:focus {
+  border-color: rgba(56, 189, 248, 0.95);
+}
+
+.obra-textarea {
+  resize: vertical;
+}
+
+.obra-hint {
+  margin: 0;
+  font-size: 0.75rem;
+  color: rgba(148, 163, 184, 0.9);
+}
+
+/* Radio / checkbox */
+.obra-radio-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.obra-radio {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  color: rgba(209, 213, 219, 0.92);
+}
+
+.obra-radio input {
+  accent-color: #007aff;
+}
+
+.obra-checkbox-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.obra-checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  color: rgba(209, 213, 219, 0.92);
+}
+.obra-checkbox input {
+  accent-color: #007aff;
+}
+
+/* Botões do footer */
+.obra-modal-footer {
+  margin-top: 0.6rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(30, 64, 175, 0.7);
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+}
+
+.obra-footer-left,
+.obra-footer-right {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.obra-btn-ghost {
+  border-radius: 999px;
+  border: none;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.8rem;
+  background: transparent;
+  color: rgba(148, 163, 184, 0.95);
+  cursor: pointer;
+}
+
+.obra-btn-secondary {
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  padding: 0.45rem 1.1rem;
+  font-size: 0.8rem;
+  background: rgba(15, 23, 42, 0.95);
+  color: #e5e7eb;
+  cursor: pointer;
+}
+
+.obra-btn-primary {
+  border-radius: 999px;
+  border: none;
+  padding: 0.45rem 1.2rem;
+  font-size: 0.8rem;
+  background: #007aff;
+  color: #f9fafb;
+  cursor: pointer;
+}
+
+.obra-btn-primary:hover {
+  background: #0060d6;
+}
+
+.obra-btn-secondary:hover {
+  border-color: rgba(56, 189, 248, 0.9);
+}
+
+.obra-btn-outline {
+  border-radius: 999px;
+  border: 1px dashed rgba(148, 163, 184, 0.7);
+  padding: 0.35rem 0.9rem;
+  font-size: 0.78rem;
+  background: transparent;
+  color: rgba(209, 213, 219, 0.94);
+  cursor: pointer;
+}
+
+.obra-btn-small {
+  padding: 0.25rem 0.7rem;
+}
+
+/* Responsivo modal */
+@media (max-width: 768px) {
+  .obra-modal {
+    max-width: 100%;
+    margin: 0 0.75rem;
+    padding: 1.1rem 1rem 1rem;
+  }
+  .obra-field-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+/* === DOCUMENTACIÓN · subida de archivos === */
+
+.obra-doc-upload {
+  margin-top: 0.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.obra-upload-area {
+  padding: 0.55rem 0.75rem;
+  border-radius: 14px;
+  border: 1px dashed rgba(55, 65, 81, 0.9);
+  background: rgba(15, 23, 42, 0.7);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.obra-file-input {
+  display: none;
+}
+
+.obra-doc-list {
+  list-style: none;
+  margin: 0.2rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  font-size: 0.78rem;
+  color: rgba(209, 213, 219, 0.94);
+}
+
+.obra-doc-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.obra-doc-pill {
+  padding: 0.1rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid rgba(55, 65, 81, 0.9);
+  font-size: 0.72rem;
+  white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Scrollbar unificado (SistemaNow) */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #034fa7 transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #0ea5e9, #22d3ee);
+  border-radius: 999px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #38bdf8, #0ea5e9);
+}

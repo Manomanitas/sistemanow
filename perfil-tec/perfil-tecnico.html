@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Perfil Técnico · Panel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Tailwind (reset + utilidades gerais, igual às outras telas) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- CSS próprio -->
+    <link rel="stylesheet" href="../componentes/navbar.css">
+    <link rel="stylesheet" href="perfil-tecnico.css" />
+    <script type="module" src="../componentes/ui-pill.js"></script>
+    <script type="module" src="../componentes/ui-button.js"></script>
+      <script src="../componentes/navbar.js" defer></script>
+  </head>
+<body class="page-with-nav">
+      <nav class="nav-shell" id="navShell">
+    <div class="nav-inner">
+      <!-- HEADER -->
+      <div class="nav-header">
+        <div class="nav-logo">
+          <span>SN</span>
+        </div>
+        <div class="nav-header-text">
+          <span class="nav-app-name">SistemaNow</span>
+          <span class="nav-app-subtitle">Panel tecnico</span>
+        </div>
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menu lateral">
+          <span class="nav-toggle-bar"></span>
+        </button>
+      </div>
+
+      <!-- SEARCH -->
+      <div class="nav-search">
+        <div class="nav-search-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" class="nav-svg">
+            <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79L19 20.5 20.5 19l-5-5Zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14Z" fill="currentColor" />
+          </svg>
+        </div>
+        <input type="text" placeholder="Buscar..." />
+      </div>
+
+      <!-- BLOCO CENTRAL - ICONES PRINCIPAIS -->
+      <div class="nav-center">
+        <ul class="nav-links">
+        <li class="nav-item" data-link="../pantalla-principal/pantalla-principal.html">
+          <span class="nav-icon-pill" aria-hidden="true">
+            <svg viewBox="0 0 24 24" class="nav-svg">
+              <path d="M4 10.25L12 3l8 7.25V20a1 1 0 0 1-1 1h-5v-5h-4v5H5a1 1 0 0 1-1-1v-9.75Z" fill="currentColor" />
+            </svg>
+          </span>
+          <span class="nav-label">Inicio</span>
+        </li>
+
+        <li class="nav-item" data-link="../perfil-tec/perfil-tecnico.html">
+          <span class="nav-icon-pill" aria-hidden="true">
+            <svg viewBox="0 0 24 24" class="nav-svg">
+              <path d="M12 2a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 12c-4.418 0-8 2.239-8 5v1h16v-1c0-2.761-3.582-5-8-5Z" fill="currentColor" />
+            </svg>
+          </span>
+          <span class="nav-label">Perfil tecnico</span>
+        </li>
+        
+        <li class="nav-item" data-link="../panel-user/usuarios-panel.html">
+          <span class="nav-icon-pill" aria-hidden="true">
+            <svg viewBox="0 0 24 24" class="nav-svg">
+              <path d="M4 6a2 2 0 0 1 2-2h12a1 1 0 0 1 .96 1.27l-2 7A1 1 0 0 1 16 13H8.618l-.5 2H17v2H7a2 2 0 0 1-1.94-2.5L6.62 6H4Zm5.236 0-1 4H15.8l1.143-4H9.236Z" fill="currentColor" />
+            </svg>
+          </span>
+          <span class="nav-label">Mi billetera</span>
+        </li>
+
+        <li class="nav-item" data-link="../panel-user/usuarios-panel.html">
+          <span class="nav-icon-pill" aria-hidden="true">
+            <svg viewBox="0 0 24 24" class="nav-svg">
+              <path d="M5 4a2 2 0 0 0-2 2v12.382l3.447-3.447A1.5 1.5 0 0 1 7.5 15H19a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H5Z" fill="currentColor" />
+            </svg>
+          </span>
+          <span class="nav-label">Comunicados</span>
+        </li>
+
+        <li class="nav-item" data-link="../panel-user/usuarios-panel.html">
+          <span class="nav-icon-pill" aria-hidden="true">
+            <svg viewBox="0 0 24 24" class="nav-svg">
+              <path d="M6 4a2 2 0 0 0-2 2v13h2l3-3h9a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H6Zm2 4h8v2H8V8Zm0 4h5v2H8v-2Z" fill="currentColor" />
+            </svg>
+          </span>
+          <span class="nav-label">Nominas</span>
+        </li>
+
+        <li class="nav-item" data-link="../orden-trab/orden-trabajo-v3-tabs.html">
+          <span class="nav-icon-pill" aria-hidden="true">
+            <svg viewBox="0 0 24 24" class="nav-svg">
+              <path d="M7 3a2 2 0 0 0-2 2v15h14V5a2 2 0 0 0-2-2H7Zm2 3h6v2H9V6Zm0 4h6v2H9v-2Zm0 4h4v2H9v-2Z" fill="currentColor" />
+            </svg>
+          </span>
+          <span class="nav-label">Ordenes de trabajo</span>
+        </li>
+
+        <li class="nav-item" data-link="../fichajes/fichaje-inicio.html">
+          <span class="nav-icon-pill" aria-hidden="true">
+            <svg viewBox="0 0 24 24" class="nav-svg">
+              <path d="M12 2a9 9 0 1 0 9 9 9.01 9.01 0 0 0-9-9Zm0 2a7 7 0 1 1-7 7 7.008 7.008 0 0 1 7-7Zm-.5 3h1.5v4.25l3 1.75-.75 1.3L11.5 12V7Z" fill="currentColor" />
+            </svg>
+          </span>
+          <span class="nav-label">Fichajes</span>
+        </li>
+        </ul>
+      </div>
+
+      <!-- BLOCO INFERIOR - HOME + USUARIO -->
+      <div class="nav-bottom">
+        <button class="nav-item nav-home" type="button">
+          <span class="nav-icon-pill" aria-hidden="true">
+            <svg viewBox="0 0 24 24" class="nav-svg">
+              <!-- seta voltar -->
+              <path
+                d="M15.5 4.5 8 12l7.5 7.5"
+                stroke="currentColor"
+                stroke-width="2"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </span>
+          <span class="nav-label">Voltar a pagina anterior</span>
+        </button>
+
+        <div class="nav-footer">
+          <div class="nav-avatar">EA</div>
+          <div class="nav-footer-meta">
+            <span class="nav-user-name">Eduardo Augusto</span>
+            <span class="nav-user-role">Oficina</span>
+            <ui-pill state="operando" label="OPERANDO"></ui-pill>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+
+
+
+    <div class="app-shell sidebar-expanded" id="appShell">
+
+      <!-- MAIN -->
+      <main class="main-area">
+        <div class="main-overlay">
+          <div class="main-inner">
+            <!-- HEADER TÉCNICO -->
+            <section class="card card-tech-header">
+              <div class="tech-header-left">
+                <div class="tech-avatar-wrap">
+                  <div class="tech-avatar">EO</div>
+                  <span class="tech-status-dot"></span>
+                </div>
+                <div class="tech-header-info">
+                  <div class="tech-header-label">INFORMACIÓN TÉCNICO</div>
+                  <div class="tech-header-name">Eduardo Oliveira</div>
+                  <div class="tech-header-meta">
+                    <span class="dot-status dot-status--green"></span>
+                    <span>Operando</span>
+                    <span class="separator">•</span>
+                    <span>Técnico de climatización</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <!-- TABS -->
+            <section class="tabs-row">
+              <button class="tab-pill is-active" data-tab="datos">
+                DATOS
+              </button>
+              <button class="tab-pill" data-tab="fichajes">
+                FICHAJES
+              </button>
+              <button class="tab-pill" data-tab="nominas">
+                NÓMINAS
+              </button>
+              <button class="tab-pill" data-tab="ausencias">
+                AUSENCIAS
+              </button>
+              <button class="tab-pill" data-tab="vacaciones">
+                VACACIONES
+              </button>
+            </section>
+
+            <!-- TAB: DATOS (tela principal de resumo) -->
+            <section class="tabs-content" data-tab-content="datos">
+              <!-- Linha: Garantías + Notificaciones -->
+              <div class="cards-row">
+                <!-- GARANTÍAS -->
+                <article class="card card-block">
+                  <header class="card-block-header">
+                    <span class="card-block-title">Garantías</span>
+                    <button class="btn btn-chip">Ver Más</button>
+                  </header>
+
+                  <div class="card-inner-elevated">
+                    <div class="garantia-item">
+                      <div class="garantia-left">
+                        <span class="bullet bullet--red"></span>
+                        <div class="garantia-text">
+                          <div class="garantia-title">
+                            Garantía #149-G1 Pendiente
+                          </div>
+                          <div class="garantia-sub">• hace 20 días</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+
+                <!-- NOTIFICACIONES PENDIENTES -->
+                <article class="card card-block">
+                  <header class="card-block-header">
+                    <span class="card-block-title">
+                      Notificaciones pendientes
+                    </span>
+                  </header>
+
+                  <div class="card-inner-elevated">
+                    <!-- 1ª notificação -->
+                    <div class="notif-item">
+                      <div class="notif-left">
+                        <span class="bullet bullet--green"></span>
+                        <div class="notif-text">
+                          <div class="notif-title">
+                            Pago pendiente por firmar
+                          </div>
+                          <div class="notif-sub">hace 20 min</div>
+                        </div>
+                      </div>
+                      <button class="btn btn-chip">Posponer</button>
+                    </div>
+
+                    <!-- 2ª notificação -->
+                    <div class="notif-item">
+                      <div class="notif-left">
+                        <span class="bullet bullet--blue"></span>
+                        <div class="notif-text">
+                          <div class="notif-title">
+                            Orden #150 completada
+                          </div>
+                          <div class="notif-sub">21 abr</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </div>
+
+              <!-- ÚLTIMOS TRABAJOS -->
+              <section class="card card-lastjobs">
+                <header class="card-lastjobs-header">
+                  <span class="card-block-title">Últimos trabajos</span>
+                </header>
+                <div class="lastjobs-table-wrapper">
+                  <table class="lastjobs-table">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>INFO</th>
+                        <th>ESTADO</th>
+                        <th>FECHA</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>150</td>
+                        <td>Instalación</td>
+                        <td>
+                          <ui-pill state="neutral" label="TERMINADO"></ui-pill>
+                        </td>
+                        <td>20 abr 2024</td>
+                      </tr>
+                      <tr>
+                        <td>148</td>
+                        <td>Reparación</td>
+                        <td>
+                          <ui-pill state="receso" label="EN CURSO"></ui-pill>
+                        </td>
+                        <td>18 abr 2024</td>
+                      </tr>
+                      <tr>
+                        <td>145</td>
+                        <td>Mantenimiento anual</td>
+                        <td>
+                          <ui-pill state="operando" label="COMPLETADO"></ui-pill>
+                        </td>
+                        <td>14 abr 2024</td>
+                      </tr>
+                      <tr>
+                        <td>142</td>
+                        <td>Reparación de cable</td>
+                        <td>
+                          <ui-pill state="neutral" label="TERMINADO"></ui-pill>
+                        </td>
+                        <td>8 abr 2024</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+            </section>
+
+            <!-- TAB: FICHAJES (mês vigente) -->
+            <section
+              class="tabs-content is-hidden"
+              data-tab-content="fichajes"
+            >
+              <section class="card card-generic">
+                <header class="card-section-header">
+                  <span class="card-block-title">
+                    Fichajes del mes actual
+                  </span>
+                  <span class="card-section-sub">
+                    Solo se muestran los fichajes del mes vigente.
+                  </span>
+                </header>
+                <div class="data-table-wrapper">
+                  <table class="data-table">
+                    <thead>
+                      <tr>
+                        <th>Fecha</th>
+                        <th>Entrada</th>
+                        <th>Salida</th>
+                        <th>Tiempo trabajo</th>
+                        <th>Sitio</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>01/11/2025</td>
+                        <td>08:12</td>
+                        <td>16:05</td>
+                        <td>07:53 h</td>
+                        <td>Oficina — Sede Central</td>
+                      </tr>
+                      <tr>
+                        <td>02/11/2025</td>
+                        <td>08:08</td>
+                        <td>15:58</td>
+                        <td>07:50 h</td>
+                        <td>Obra #123 — Valencia</td>
+                      </tr>
+                      <tr>
+                        <td>03/11/2025</td>
+                        <td>08:20</td>
+                        <td>16:10</td>
+                        <td>07:50 h</td>
+                        <td>Ruta zona norte</td>
+                      </tr>
+                      <tr>
+                        <td>04/11/2025</td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>Sin fichar</td>
+                        <td>—</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+            </section>
+
+            <!-- TAB: NÓMINAS (3 últimas, solo visualización) -->
+            <section
+              class="tabs-content is-hidden"
+              data-tab-content="nominas"
+            >
+              <section class="card card-generic">
+                <header class="card-section-header">
+                  <span class="card-block-title">Últimas nóminas</span>
+                  <span class="card-section-sub">
+                    Solo disponible la visualización de las 3 últimas nóminas.
+                  </span>
+                </header>
+                <div class="data-table-wrapper">
+                  <table class="data-table">
+                    <thead>
+                      <tr>
+                        <th>Mes</th>
+                        <th>Año</th>
+                        <th>Estado</th>
+                        <th>Acción</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Octubre</td>
+                        <td>2025</td>
+                        <td>
+                          <ui-pill state="operando" label="DISPONIBLE"></ui-pill>
+                        </td>
+                        <td>
+                          <button class="btn btn-ghost btn-xs">
+                            Ver nómina
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Septiembre</td>
+                        <td>2025</td>
+                        <td>
+                          <ui-pill state="operando" label="DISPONIBLE"></ui-pill>
+                        </td>
+                        <td>
+                          <button class="btn btn-ghost btn-xs">
+                            Ver nómina
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Agosto</td>
+                        <td>2025</td>
+                        <td>
+                          <ui-pill state="operando" label="DISPONIBLE"></ui-pill>
+                        </td>
+                        <td>
+                          <button class="btn btn-ghost btn-xs">
+                            Ver nómina
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+            </section>
+
+            <!-- TAB: AUSENCIAS (lista simples do técnico) -->
+            <section
+              class="tabs-content is-hidden"
+              data-tab-content="ausencias"
+            >
+              <section class="card card-generic">
+                <header class="card-section-header">
+                  <span class="card-block-title">Ausencias registradas</span>
+                  <span class="card-section-sub">
+                    Ausencias informadas por administración para este técnico.
+                  </span>
+                </header>
+                <div class="data-table-wrapper">
+                  <table class="data-table">
+                    <thead>
+                      <tr>
+                        <th>Fecha</th>
+                        <th>Tipo</th>
+                        <th>Motivo</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>10/09/2025</td>
+                        <td>Baja médica</td>
+                        <td>Lesión de espalda</td>
+                      </tr>
+                      <tr>
+                        <td>21/09/2025</td>
+                        <td>Permiso</td>
+                        <td>Cita administrativa</td>
+                      </tr>
+                      <tr>
+                        <td>02/10/2025</td>
+                        <td>Sin justificar</td>
+                        <td>—</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+            </section>
+
+            <!-- TAB: VACACIONES (días a disfrutar / disfrutados) -->
+            <section
+              class="tabs-content is-hidden"
+              data-tab-content="vacaciones"
+            >
+              <section class="card card-generic">
+                <header class="card-section-header">
+                  <span class="card-block-title">Vacaciones</span>
+                  <span class="card-section-sub">
+                    Resumen de días de vacaciones del año actual.
+                  </span>
+                </header>
+                <div class="data-table-wrapper">
+                  <table class="data-table">
+                    <thead>
+                      <tr>
+                        <th>Año</th>
+                        <th>Días a disfrutar</th>
+                        <th>Días disfrutados</th>
+                        <th>Días pendientes</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>2025</td>
+                        <td>22</td>
+                        <td>8</td>
+                        <td>14</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+            </section>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- JS próprio -->
+    <script src="perfil-tecnico.js"></script>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+
+Chavales 
+
+Tenemos que hacer el calculo de las vacaciones de los trabajadores segun el fichaje.
+Seria:
+um panel de vacaciones 
+este panel de vacaciones computara los días de vacaciones de acuerdo con el fichaje 
+a cada 30 mes trabajado hay que mostrar al admin vacaciones
+ej:
+fecha de alta 05/01/24
+
+ TOTAL DE DIAS ACUMULADOS:( CADUCA LAS VACACIONES CADA FINAL DE AÑO)
+
+ ENTONCES LA IDEA ES QUE CADA UNO DISFRUTE DE LAS SUYAS 
+
+CALCULANDO:
+
+05/01/24 ALTA 
+VACACIONES ACUMULADAS HASTA HOY (CADA MES SE AÑADE 2.5 DIAS)
+2     ENERO
+2.5   FEBRERO
+2.5   MARZO
+2.5   ABRIL
+2.5   MAIO
+2.5   JUNIO
+2.5   JULIO
+2.5   AGOSTO
+2.5   SEPTEMBRE
+---
+22 DIAS DE VACACIONES 
+10 DISFRUTADOS           DISFRUTADO DESDE 09/09/24 HASTA 19/09/24
+12 PENDIETE
+
+cada 01/01/xx de cada año se vuelve a empezar 
+los calculos quedando el historial antiguo. 
+
+>12  = 1 CADA 12 DIAS TRABAJADOS IGUAL A 1 DIA ACUMULADO  (EJ:9=0 Y 13=1)
+>24  = 2 CADA 24 DIAS TRABAJADOS IGUAL A 2 DIAS ACUMULADOS(EJ:23=1 , 24=2 Y 26=2) 
+>=30 = 2.5
+
+CREO QUE ME EXPLIQUE MAS O MENOS 
+EL FICHAJE CALCULA LAS VACACIONES QUE INDICARA EN https://manomanitas.es/sistemnow/tecnicos
+LAS VACACIONES INDICA EL ADMIN MANUALMENTE CUANDO UNO DISFRUTA.
+
+EL NONBRE DE TECNICOS DISPONIBLE CAMBIAR POR INFO TECNICO EN
+https://manomanitas.es/sistemnow/index.php
+
+ALGUN COMENTARIO?
+

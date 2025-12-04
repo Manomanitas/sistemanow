@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Panel de Usuarios - SistemaNow</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="../componentes/navbar.css" />
+    <link rel="stylesheet" href="usuarios-panel.css" />
+    <script type="module" src="../componentes/ui-pill.js"></script>
+    <script type="module" src="../componentes/ui-button.js"></script>
+    <script src="../componentes/navbar.js" defer></script>
+
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body class="page-with-nav">
+        <nav class="nav-shell" id="navShell">
+    <div class="nav-inner">
+      <!-- HEADER -->
+      <div class="nav-header">
+        <div class="nav-logo">
+          <span>SN</span>
+        </div>
+        <div class="nav-header-text">
+          <span class="nav-app-name">SistemaNow</span>
+          <span class="nav-app-subtitle">Panel tecnico</span>
+        </div>
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menu lateral">
+          <span class="nav-toggle-bar"></span>
+        </button>
+      </div>
+
+      <!-- SEARCH -->
+      <div class="nav-search">
+        <div class="nav-search-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" class="nav-svg">
+            <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79L19 20.5 20.5 19l-5-5Zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14Z" fill="currentColor" />
+          </svg>
+        </div>
+        <input type="text" placeholder="Buscar..." />
+      </div>
+
+      <!-- BLOCO CENTRAL - ICONES PRINCIPAIS -->
+      <div class="nav-center">
+        <ul class="nav-links">
+        <li class="nav-item" data-link="../pantalla-principal/pantalla-principal.html">
+          <span class="nav-icon-pill" aria-hidden="true">
+            <svg viewBox="0 0 24 24" class="nav-svg">
+              <path d="M4 10.25L12 3l8 7.25V20a1 1 0 0 1-1 1h-5v-5h-4v5H5a1 1 0 0 1-1-1v-9.75Z" fill="currentColor" />
+            </svg>
+          </span>
+          <span class="nav-label">Inicio</span>
+        </li>
+
+        <li class="nav-item" data-link="../perfil-tec/perfil-tecnico.html">
+          <span class="nav-icon-pill" aria-hidden="true">
+            <svg viewBox="0 0 24 24" class="nav-svg">
+              <path d="M12 2a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 12c-4.418 0-8 2.239-8 5v1h16v-1c0-2.761-3.582-5-8-5Z" fill="currentColor" />
+            </svg>
+          </span>
+          <span class="nav-label">Perfil tecnico</span>
+        </li>
+        
+        <li class="nav-item" data-link="../panel-user/usuarios-panel.html">
+          <span class="nav-icon-pill" aria-hidden="true">
+            <svg viewBox="0 0 24 24" class="nav-svg">
+              <path d="M4 6a2 2 0 0 1 2-2h12a1 1 0 0 1 .96 1.27l-2 7A1 1 0 0 1 16 13H8.618l-.5 2H17v2H7a2 2 0 0 1-1.94-2.5L6.62 6H4Zm5.236 0-1 4H15.8l1.143-4H9.236Z" fill="currentColor" />
+            </svg>
+          </span>
+          <span class="nav-label">Mi billetera</span>
+        </li>
+
+        <li class="nav-item" data-link="../panel-user/usuarios-panel.html">
+          <span class="nav-icon-pill" aria-hidden="true">
+            <svg viewBox="0 0 24 24" class="nav-svg">
+              <path d="M5 4a2 2 0 0 0-2 2v12.382l3.447-3.447A1.5 1.5 0 0 1 7.5 15H19a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H5Z" fill="currentColor" />
+            </svg>
+          </span>
+          <span class="nav-label">Comunicados</span>
+        </li>
+
+        <li class="nav-item" data-link="../panel-user/usuarios-panel.html">
+          <span class="nav-icon-pill" aria-hidden="true">
+            <svg viewBox="0 0 24 24" class="nav-svg">
+              <path d="M6 4a2 2 0 0 0-2 2v13h2l3-3h9a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H6Zm2 4h8v2H8V8Zm0 4h5v2H8v-2Z" fill="currentColor" />
+            </svg>
+          </span>
+          <span class="nav-label">Nominas</span>
+        </li>
+
+        <li class="nav-item" data-link="../orden-trab/orden-trabajo-v3-tabs.html">
+          <span class="nav-icon-pill" aria-hidden="true">
+            <svg viewBox="0 0 24 24" class="nav-svg">
+              <path d="M7 3a2 2 0 0 0-2 2v15h14V5a2 2 0 0 0-2-2H7Zm2 3h6v2H9V6Zm0 4h6v2H9v-2Zm0 4h4v2H9v-2Z" fill="currentColor" />
+            </svg>
+          </span>
+          <span class="nav-label">Ordenes de trabajo</span>
+        </li>
+
+        <li class="nav-item" data-link="../fichajes/fichaje-inicio.html">
+          <span class="nav-icon-pill" aria-hidden="true">
+            <svg viewBox="0 0 24 24" class="nav-svg">
+              <path d="M12 2a9 9 0 1 0 9 9 9.01 9.01 0 0 0-9-9Zm0 2a7 7 0 1 1-7 7 7.008 7.008 0 0 1 7-7Zm-.5 3h1.5v4.25l3 1.75-.75 1.3L11.5 12V7Z" fill="currentColor" />
+            </svg>
+          </span>
+          <span class="nav-label">Fichajes</span>
+        </li>
+        </ul>
+      </div>
+
+      <!-- BLOCO INFERIOR - HOME + USUARIO -->
+      <div class="nav-bottom">
+        <button class="nav-item nav-home" type="button">
+          <span class="nav-icon-pill" aria-hidden="true">
+            <svg viewBox="0 0 24 24" class="nav-svg">
+              <!-- seta voltar -->
+              <path
+                d="M15.5 4.5 8 12l7.5 7.5"
+                stroke="currentColor"
+                stroke-width="2"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </span>
+          <span class="nav-label">Voltar a pagina anterior</span>
+        </button>
+
+        <div class="nav-footer">
+          <div class="nav-avatar">EA</div>
+          <div class="nav-footer-meta">
+            <span class="nav-user-name">Eduardo Augusto</span>
+            <span class="nav-user-role">Oficina</span>
+            <ui-pill state="operando" label="OPERANDO"></ui-pill>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+
+
+    <div id="root"></div>
+
+    <script type="text/babel" src="usuarios-panel.js"></script>
+  </body>
+</html>

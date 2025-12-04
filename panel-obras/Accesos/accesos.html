@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Accesos · Panel Gestión Obra</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- React 18 -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <!-- Babel para JSX -->
+  <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      background: #020617;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState } = React;
+
+    const COLORS = {
+      primary: "#007AFF",
+      accent: "#7C3AED",
+      success: "#16A34A",
+      warning: "#F59E0B",
+      danger: "#EF4444",
+      muted: "rgba(255,255,255,0.35)",
+      border: "rgba(255,255,255,0.15)",
+      glass: "rgba(15,23,42,0.72)",
+    };
+
+    function Frosted({ children, className = "", style = {} }) {
+      return (
+        <div
+          className={
+            "rounded-2xl border shadow-[0_8px_30px_rgba(0,0,0,0.25)] " +
+            className
+          }
+          style={{
+            borderColor: COLORS.border,
+            background: COLORS.glass,
+            backdropFilter: "blur(18px)",
+            ...style,
+          }}
+        >
+          {children}
+        </div>
+      );
+    }
+
+    function Button({ children, tone = "primary", className = "", ...rest }) {
+      let styles =
+        tone === "primary"
+          ? "bg-[#007AFF] hover:bg-[#0060d6] text-white"
+          : tone === "danger"
+          ? "bg-[#EF4444] hover:bg-[#dc2626] text-white"
+          : "bg-white/5 hover:bg-white/15 text-white border border-white/15";
+      return (
+        <button
+          {...rest}
+          className={
+            "rounded-xl px-4 py-2 text-xs md:text-sm font-semibold transition " +
+            styles +
+            " " +
+            className
+          }
+        >
+          {children}
+        </button>
+      );
+    }
+
+    // Info simulada da obra (apenas para referência no título, sem repetir endereço)
+    const OBRA_INFO = {
+      codigo: "OB-2025-001",
+      nombre: "Calle Jesús 12",
+      cliente: "TELDOMO",
+    };
+
+    // Acceso via plataforma (exemplo)
+    const ACCESO_PLATAFORMA = {
+      tipo: "Plataforma / sistema remoto",
+      idAcceso: "PLAT-AC-009874",
+      fechaInicio: "01/11/2025 · 08:00",
+      fechaFin: "01/02/2026 · 20:00",
+      estado: "Disponible", // "Disponible" | "Caducado"
+      notas:
+        "Acceso remoto para apertura de portal principal y cuarto de máquinas.",
+    };
+
+    // Outros accesos: chave física, vizinho, empresa, etc.
+    const CONTACTOS_ACCESO = [
+      {
+        id: 1,
+        rol: "Empresa / administrador",
+        nombre: "ADMIN FINCA JESÚS 12",
+        telefono: "+34 963 000 123",
+        email: "info@adminjesus12.es",
+        notas: "Contacto principal para coordinar accesos y llaves de portal.",
+      },
+      {
+        id: 2,
+        rol: "Vecino de apoyo",
+        nombre: "CARLOS LÓPEZ",
+        telefono: "+34 600 123 456",
+        email: "",
+        notas:
+          "Vecino 3ºB · abre puerta del rellano y acceso a cubierta cuando sea necesario.",
+      },
+      {
+        id: 3,
+        rol: "Empresa de seguridad",
+        nombre: "SEGURVAL SISTEMAS",
+        telefono: "+34 961 555 777",
+        email: "operaciones@segurval.es",
+        notas: "Control de acceso a sala de máquinas y sistema de alarma.",
+      },
+    ];
+    function EstadoAccesoChip({ estado }) {
+      const normalized = (estado || "").toLowerCase();
+      let bg = "bg-slate-500/30 text-slate-100";
+      let label = estado || "Desconocido";
+
+      if (normalized === "disponible") {
+        bg = "bg-emerald-500/20 text-emerald-100";
+        label = "Acceso disponible";
+      }
+      if (normalized === "caducado") {
+        bg = "bg-red-500/20 text-red-100";
+        label = "Acceso caducado";
+      }
+      return (
+        <span className={"px-3 py-[6px] rounded-full text-xs md:text-sm inline-flex items-center gap-2 " + bg}>
+          <span
+            className={
+              "h-2.5 w-2.5 rounded-full " +
+              (normalized === "disponible"
+                ? "bg-emerald-400"
+                : normalized === "caducado"
+                ? "bg-red-400"
+                : "bg-slate-400")
+            }
+          />
+          {label}
+        </span>
+      );
+    }
+    function AccesosObraPage() {
+      const [acceso] = useState(ACCESO_PLATAFORMA);
+      const [contactos] = useState(CONTACTOS_ACCESO);
+      return (
+        <div className="min-h-screen w-full bg-[url('https://images.unsplash.com/photo-1487958449943-2429e8be8625?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center">
+          <div className="min-h-screen w-full bg-black/75 flex flex-col items-center px-4 py-6 text-white">
+            <div className="w-full max-w-[1180px] space-y-4">
+              {/* Header Accesos */}
+              <Frosted className="p-4">
+                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+                  <div>
+                    <div className="text-[11px] md:text-xs opacity-70 uppercase tracking-wide">
+                      Panel de gestión · Accesos
+                    </div>
+                    <div className="text-xl md:text-2xl font-semibold mt-1">
+                      Accesos de la obra
+                    </div>
+                    <div className="text-xs md:text-sm opacity-75 mt-1">
+                      {OBRA_INFO.nombre} · {OBRA_INFO.codigo} · Cliente: {OBRA_INFO.cliente}
+                    </div>
+                    <p className="text-sm md:text-base text-white/80 mt-3">
+                      Aquí se muestra la información relacionada con el{" "}
+                      <span className="font-semibold">acceso por plataforma</span> y los{" "}
+                      <span className="font-semibold">contactos responsables</span> de abrir
+                      puertas o facilitar llaves en esta obra.
+                    </p>
+                  </div>
+                  <div className="flex flex-col items-end gap-2 text-xs md:text-sm">
+                    <Button
+                      tone="ghost"
+                      className="!px-3 !py-1.5"
+                      onClick={() => window.history.back()}
+                    >
+                      ← Volver a la obra
+                    </Button>
+                  </div>
+                </div>
+              </Frosted>
+              {/* Acceso por plataforma */}
+              <Frosted className="p-4">
+                <div className="flex items-center justify-between mb-4">
+                  <div>
+                    <div className="text-sm md:text-base font-semibold">
+                      Acceso por plataforma / sistema remoto
+                    </div>
+                    <div className="text-xs md:text-sm text-white/70 mt-1">
+                      Datos del acceso digital asignado a esta obra.
+                    </div>
+                  </div>
+                  <EstadoAccesoChip estado={acceso.estado} />
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm md:text-base">
+                  <div>
+                    <div className="text-[11px] md:text-xs text-white/60 uppercase tracking-wide mb-1">
+                      ID del acceso
+                    </div>
+                    <div className="text-sm md:text-lg font-semibold">
+                      {acceso.idAcceso}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-[11px] md:text-xs text-white/60 uppercase tracking-wide mb-1">
+                      Tipo de acceso
+                    </div>
+                    <div className="text-sm md:text-base">
+                      {acceso.tipo}
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="text-[11px] md:text-xs text-white/60 uppercase tracking-wide mb-1">
+                      Fecha de inicio
+                    </div>
+                    <div className="text-sm md:text-base">
+                      {acceso.fechaInicio}
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="text-[11px] md:text-xs text-white/60 uppercase tracking-wide mb-1">
+                      Fecha de fin
+                    </div>
+                    <div className="text-sm md:text-base">
+                      {acceso.fechaFin}
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-4 text-sm md:text-base text-white/80">
+                  <span className="font-semibold">Notas:</span>{" "}
+                  {acceso.notas}
+                </div>
+              </Frosted>
+
+              {/* Contactos responsables de accesos */}
+              <Frosted className="p-4">
+                <div className="flex items-center justify-between mb-3">
+                  <div>
+                    <div className="text-sm md:text-base font-semibold">
+                      Contactos responsables de accesos
+                    </div>
+                    <div className="text-xs md:text-sm text-white/70 mt-1">
+                      Personas o empresas que pueden abrir puertas, portales o dar llaves.
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm md:text-base">
+                  {contactos.map((c) => (
+                    <div
+                      key={c.id}
+                      className="rounded-xl border border-white/15 bg-white/5 p-3 flex flex-col gap-1"
+                    >
+                      <div className="text-[11px] md:text-xs uppercase tracking-wide text-white/60">
+                        {c.rol}
+                      </div>
+                      <div className="text-sm md:text-lg font-semibold">
+                        {c.nombre}
+                      </div>
+                      {c.telefono && (
+                        <div className="text-white/80 text-sm md:text-base">
+                          📞 {c.telefono}
+                        </div>
+                      )}
+                      {c.email && (
+                        <div className="text-white/70 break-all text-xs md:text-sm">
+                          ✉️ {c.email}
+                        </div>
+                      )}
+                      {c.notas && (
+                        <div className="text-[11px] md:text-sm text-white/70 mt-1">
+                          {c.notas}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </Frosted>
+            </div>
+          </div>
+        </div>
+      );
+    }
+    function Component() {
+      return <AccesosObraPage />;
+    }
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<Component />);
+  </script>
+</body>
+</html>

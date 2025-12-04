@@ -1,0 +1,837 @@
+/* ===== Reset ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+:root {
+  --ui-bg-body: #020617;
+  --ui-card-bg: rgba(15, 23, 42, 0.92);
+  --ui-card-border: rgba(148, 163, 184, 0.25);
+  --ui-card-shadow: 0 20px 60px rgba(0, 0, 0, 0.75);
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    sans-serif;
+}
+
+/* Fundo corporativo */
+body {
+  min-height: 100vh;
+  background-image: url("../assets/images/ciudad-de-les-artes.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: #f9fafb;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+      circle at top left,
+      rgba(15, 23, 42, 0.85),
+      rgba(15, 23, 42, 0.4)
+    );
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Overlay escuro */
+.overlay {
+  min-height: 100vh;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.15);
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  padding: 1.8rem 1.2rem 2.8rem;
+  overflow-y: auto;
+}
+
+/* Container principal */
+.dashboard-container {
+  width: 100%;
+  max-width: 1180px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+
+/* Cartões vidro fosco – padrão único do sistema */
+.glass-card {
+  border-radius: 26px;
+  border: 1px solid var(--ui-card-border);
+  background: var(--ui-card-bg);
+  backdrop-filter: blur(22px);
+  box-shadow: var(--ui-card-shadow);
+  padding: 1.6rem 1.7rem;
+}
+
+.hero-small {
+  margin: 0;
+  font-size: 0.78rem;
+  color: rgba(156, 163, 175, 0.95);
+}
+
+/* Stats */
+.hero-stats {
+  margin-top: 1.4rem;
+  display: flex;
+  align-items: stretch;
+  gap: 1.6rem;
+}
+/* Botão CTA no hero para "Órdenes en curso" */
+.hero-cta {
+  margin-top: 0.35rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.45rem 1.1rem;
+  border-radius: 999px;
+  border: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: #007aff;                   /* primário do guia */
+  color: #f9fafb;
+  cursor: pointer;
+  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.8);
+  transition: background 0.15s ease, transform 0.12s ease,
+    box-shadow 0.15s ease;
+}
+
+.stat-item {
+  flex: 1;
+}
+
+.stat-label {
+  margin: 0;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: rgba(148, 163, 184, 0.96);
+}
+
+.stat-value {
+  margin: 0.35rem 0 0.1rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.stat-hint {
+  margin: 0;
+  font-size: 0.8rem;
+  color: rgba(156, 163, 175, 0.96);
+}
+
+.stat-separator {
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(148, 163, 184, 0.5),
+    transparent
+  );
+}
+
+/* ===== GRID SUPERIOR ===== */
+.dashboard-grid-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
+  gap: 1.6rem;
+}
+
+/* Headers de cartão */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.4rem;
+  align-items: flex-start;
+  margin-bottom: 1.1rem;
+}
+
+.card-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.card-subtitle {
+  margin: 0.35rem 0 0;
+  font-size: 0.85rem;
+  color: rgba(156, 163, 175, 0.96);
+}
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  justify-content: flex-end;
+}
+
+.tag {
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.tag-pill {
+  background: rgba(56, 189, 248, 0.16);
+  border: 1px solid rgba(56, 189, 248, 0.9);
+}
+
+.tag-muted {
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.8);
+}
+
+/* ===== FICHAJES DEL DÍA ===== */
+.fichajes-card {
+  padding-bottom: 1.3rem;
+}
+
+/* Wrapper com scroll vertical (altura fixa para garantir scroll) */
+.fichajes-table-wrapper {
+  width: 103%;
+  height: 250px;
+  max-height: 290px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 0.6rem;
+
+  scrollbar-color: #034fa7 transparent;   /* Firefox */
+}
+
+/* WebKit / Chrome / Edge / Safari */
+/* Tabela ocupa o espaço do card, sem forçar largura extra */
+.fichajes-table {
+  width: 100%;
+  min-width: 0;
+}
+
+.fichajes-row {
+  display: grid;
+  grid-template-columns: minmax(0, 2.2fr) minmax(0, 0.8fr) minmax(0, 0.8fr) minmax(
+      0,
+      1.1fr
+    );
+  align-items: center;
+  padding: 0.55rem 0.85rem;
+  column-gap: 0.75rem;
+  font-size: 0.85rem;
+}
+
+.fichajes-head {
+  background: rgba(10, 16, 30, 0.98);
+  border-bottom: 1px solid rgba(51, 65, 85, 0.85);
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: rgba(148, 163, 184, 0.88);
+  font-weight: 600;
+}
+
+.fichajes-row:nth-child(2n + 1):not(.fichajes-head) {
+  background: rgba(9, 13, 24, 0.96);
+}
+
+.fichajes-row:nth-child(2n):not(.fichajes-head) {
+  background: rgba(6, 10, 20, 0.94);
+}
+
+.col-worker {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+/* avatar – igual à guia, círculo laranja sólido com dot de estado */
+.avatar-sm {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  background-color: #ff611a; /* laranja sólido padrão SistemaNow */
+  border: 1px solid rgba(248, 250, 252, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.82rem; /* font-size um pouco maior */
+  font-weight: 700;
+  color: #ffffff;
+}
+
+/* avatar – igual à guia, círculo laranja sólido com dot de estado */
+.avatar-sm {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  background-color: #ff611a; /* laranja sólido padrão SistemaNow */
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.82rem; /* font-size um pouco maior */
+  font-weight: 700;
+  color: #ffffff;
+}
+
+/* bolinha de estado no canto inferior (padrão: OPERANDO – verde) */
+.avatar-sm::after {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  right: -3px;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: 2px solid #020617; /* borda da cor do fundo */
+  background-color: #22c55e; /* verde OPERANDO */
+}
+
+/* variações de estado – só mudam a cor da bolinha */
+.avatar-vacaciones {
+  background-color: #ff611a; /* mantém laranja sólido */
+}
+.avatar-vacaciones::after {
+  background-color: #3b82f6; /* azul – vacaciones */
+}
+
+.avatar-ausente {
+  background-color: #ff611a; /* mantém laranja sólido */
+}
+.avatar-ausente::after {
+  background-color: #dc2626; /* vermelho – ausente */
+}
+
+.worker-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.worker-name {
+  font-size: 0.9rem;
+}
+
+.worker-role {
+  font-size: 0.72rem;
+  color: rgba(148, 163, 184, 0.96);
+}
+
+.col-hour,
+.col-status {
+  text-align: left;
+}
+
+/* Estados */
+/* ===== ESTADOS DO TÉCNICO (iguais ao guia de estilo) ===== */
+
+/* base do chip */
+/* Footer */
+.card-footer {
+  margin-top: 0.8rem;
+}
+
+.card-footer-text {
+  margin: 0;
+  font-size: 0.78rem;
+  color: rgba(156, 163, 175, 0.96);
+}
+
+.dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  margin: 0 0.15rem 0 0.4rem;
+}
+
+.dot-operando {
+  background: #22c55e;
+}
+.dot-vacaciones {
+  background: #0ea5e9;
+}
+.dot-ausente {
+  background: #ef4444;
+}
+.dot-receso {
+  background: #f59e0b;
+}
+
+/* ===== GESTIÓN ÓRDENES ===== */
+.ordenes-card {
+  padding-bottom: 1.2rem;
+}
+
+.shortcuts-grid {
+  margin-top: 0.7rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-left: -1rem;
+  margin-right: 10px;
+}
+
+.shortcut-btn {
+  min-width: 160px;
+  border-radius: 18px;
+  border: 1px solid rgba(55, 65, 81, 0.9);
+  background: radial-gradient(
+      circle at top left,
+      rgba(17, 24, 39, 0.95),
+      rgba(9, 13, 24, 0.98)
+    );
+  padding: 1rem 1rem;
+  color: whitesmoke;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+  gap: 15px;
+  box-shadow: 0 12px 28px rgba(67, 67, 67, 0.129);
+  transition: transform 0.1s ease, box-shadow 0.1s ease, border-color 0.1s ease,
+    background 0.1s ease;
+}
+
+.shortcut-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.129);
+  border-color: rgba(56, 189, 248, 0.7);
+}
+
+.shortcut-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.9);
+}
+
+.shortcut-btn-muted {
+  border-style: dashed;
+  border-color: rgba(75, 85, 99, 0.95);
+  background: radial-gradient(
+      circle at top left,
+      rgba(15, 23, 42, 0.9),
+      rgba(9, 13, 24, 0.98)
+    );
+}
+
+.shortcut-icon {
+  font-size: 1.2rem;
+}
+
+.shortcut-title {
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+/* ===== CALENDÁRIO ===== */
+.calendar-current {
+  display: none;
+}
+.calendar-card {
+  padding-bottom: 1.4rem;
+}
+
+.calendar-header {
+  align-items: center;
+}
+
+.calendar-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.calendar-nav {
+  border-radius: 999px;
+  width: 28px;
+  height: 28px;
+  border: 1px solid rgba(148, 163, 184, 0.85);
+  background: rgba(15, 23, 42, 0.95);
+  color: #e5e7eb;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.calendar-nav:hover {
+  border-color: rgba(56, 189, 248, 0.95);
+}
+
+.calendar-current {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.82rem;
+}
+
+.calendar-current span:first-child {
+  font-weight: 600;
+}
+
+/* Grid do calendário por semanas */
+.calendar-grid {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+/* Cabeçalho dias da semana */
+.calendar-daynames-row {
+  display: grid;
+  grid-template-columns: 0.55fr repeat(7, minmax(0, 1fr));
+  /* resto igual */
+}
+
+.calendar-dayname {
+  text-align: center;
+}
+
+/* Linha de semana (Semana XX + 7 dias) */
+.calendar-week-row {
+  display: grid;
+  grid-template-columns: 0.55fr repeat(7, minmax(0, 1fr));
+  /* resto igual */
+}
+
+
+/* Células de dia – maiores e fundo sólido */
+.calendar-cell {
+  min-height: 110px;              /* MAIS ALTO: cabe mais funcionários */
+  border-radius: 16px;
+  border: 1px solid rgba(51, 65, 85, 0.95);
+  background: #0b1020;            /* COR SÓLIDA */
+  padding: 0.35rem 0.45rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+/* Dias fora do mês – um pouco mais escuros */
+.calendar-cell-muted {
+  background: #050814;
+  opacity: 0.65;
+}
+
+.calendar-day-number {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.calendar-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15rem;
+  margin-top: 0.15rem;
+}
+
+.badge-state {
+  border-radius: 999px;
+  font-size: 0.6rem;
+  padding: 0.08rem 0.3rem;
+}
+
+/* cores dos badges */
+.badge-operando {
+  background: rgba(34, 197, 94, 0.22);
+  color: #bbf7d0;
+}
+.badge-vacaciones {
+  background: rgba(56, 189, 248, 0.22);
+  color: #bae6fd;
+}
+.badge-ausente {
+  background: rgba(239, 68, 68, 0.22);
+  color: #fecaca;
+}
+.badge-baja {
+  background: rgba(129, 140, 248, 0.22);
+  color: #e0e7ff;
+}
+.badge-receso {
+  background: rgba(245, 158, 11, 0.22);
+  color: #fed7aa;
+}
+
+/* Rodapé legenda */
+.calendar-footer {
+  margin-top: 1.1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  font-size: 0.76rem;
+  color: rgba(156, 163, 175, 0.96);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.legend-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+}
+
+.legend-operando {
+  background: #22c55e;
+}
+.legend-vacaciones {
+  background: #0ea5e9;
+}
+.legend-ausente {
+  background: #ef4444;
+}
+.legend-baja {
+  background: #6366f1;
+}
+.legend-receso {
+  background: #f59e0b;
+}
+
+/* Brand footer */
+.brand-footer {
+  margin-top: 0.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.86rem;
+  color: rgba(209, 213, 219, 0.96);
+}
+
+.brand-logo {
+  font-size: 1.05rem;
+}
+
+.brand-text {
+  font-weight: 600;
+}
+
+/* ===== Responsivo ===== */
+
+@media (max-width: 1024px) {
+  .dashboard-grid-top {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero-main {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-status {
+    align-items: flex-start;
+  }
+
+  .hero-stats {
+    flex-direction: column;
+  }
+
+  .stat-separator {
+    display: none;
+  }
+
+  .shortcuts-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .overlay {
+    padding: 1.2rem 0.7rem 2rem;
+  }
+
+  .glass-card {
+    padding: 1.3rem 1.1rem;
+    border-radius: 22px;
+  }
+
+  .hero-title {
+    font-size: 1.5rem;
+  }
+
+  .shortcuts-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .calendar-week-row,
+  .calendar-daynames-row {
+    grid-template-columns: 1.2fr repeat(7, minmax(0, 1fr));
+  }
+
+  .calendar-cell {
+    min-height: 90px; /* mais alto mesmo no mobile */
+  }
+}
+/* ========= CALENDÁRIO · SELECTS DE MÊS E ANO ========= */
+
+.calendar-selector {
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(18px);
+  color: #f9fafb;
+  padding: 0.35rem 1rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+}
+
+.calendar-selector:hover {
+  border-color: rgba(56, 189, 248, 0.9);
+}
+
+/* ========= CALENDÁRIO · LABEL DA SEMANA (W/44 + seta) ========= */
+
+/* sobrescreve o estilo anterior, deixando espaço pra seta à direita */
+.calendar-week-label {
+  font-size: 0.76rem;
+  color: rgba(148, 163, 184, 0.95);
+  display: flex;
+  align-items: flex-start;
+  padding-top: 0.4rem;
+}
+
+
+/* pequena seta para expandir semana */
+.expand-week-btn {
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  padding: 0;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(148, 163, 184, 0.95);
+}
+.expand-week-btn:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+/* ========= CALENDÁRIO · AVATARES DENTRO DO DIA ========= */
+
+.calendar-worker-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 0.35rem;
+}
+
+.calendar-avatar {
+  position: relative;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  background-color: #ff611a; /* laranja padrão SistemaNow */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+/* o "dot" do estado vai ser um .legend-dot reaproveitado, posicionado aqui via JS */
+
+/* ========= CALENDÁRIO · TOOLTIP DO AVATAR ========= */
+
+.avatar-tooltip {
+  position: absolute;
+  background: rgba(15, 23, 42, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(18px);
+  padding: 0.55rem 0.8rem;
+  border-radius: 14px;
+  font-size: 0.75rem;
+  color: #f9fafb;
+  z-index: 9999;
+  display: none;
+  white-space: nowrap;
+}
+
+/* código W/44 (herda o estilo geral, só garante alinhamento) */
+.week-label-code {
+  text-transform: uppercase;
+}
+
+/* Botón "VER MÁS" estilo pill, no mesmo mood das tags / CTA */
+.week-details-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.18rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.85);
+  background: rgba(15, 23, 42, 0.95);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(209, 213, 219, 0.96);
+  cursor: pointer;
+}
+
+.week-details-btn:hover {
+  border-color: rgba(56, 189, 248, 0.95);
+  color: #f9fafb;
+}
+/* Célula extra embaixo de cada semana para o botão "Ampliar semana" */
+.calendar-week-expand-cell {
+  grid-column: 2 / -1;        /* ocupa só a área dos dias, não o W/44 */
+  display: flex;
+  justify-content: flex-end;  /* botão à direita */
+  padding-top: 0.35rem;
+}
+
+/* Botão estilo pill, em cinza claro tipo o antigo "Ampliar semana" */
+.calendar-week-expand-btn {
+  border-radius: 999px;
+  border: none;
+  padding: 0.35rem 1.4rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: none;
+  background: rgba(148, 163, 184, 0.22);   /* cinza suave */
+  color: #e5e7eb;
+  cursor: pointer;
+}
+
+.calendar-week-expand-btn:hover {
+  background: rgba(148, 163, 184, 0.35);
+}
+
+/* Scrollbar unificado (SistemaNow) */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #034fa7 transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #0ea5e9, #22d3ee);
+  border-radius: 999px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #38bdf8, #0ea5e9);
+}

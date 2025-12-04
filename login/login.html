@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login · Sistema Manomanitas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="login.css" />
+</head>
+<body>
+  <div class="overlay">
+    <main class="login-container">
+      <!-- CARD DE LOGIN -->
+      <section id="loginCard" class="login-card">
+        <!-- TITULO -->
+        <div class="login-title">
+          <h1>Bienvenido</h1>
+          <p>Inicia sesión para continuar.</p>
+        </div>
+
+        <!-- FORM -->
+        <form id="loginForm" class="login-form">
+          <div class="form-field">
+            <label class="field-label" for="username">
+              <span class="field-icon" aria-hidden="true">
+                <!-- Ícone usuário (SVG simples) -->
+                <svg viewBox="0 0 24 24" class="icon">
+                  <path
+                    d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-3.33 0-6 2.24-6 5v.5a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 .5-.5V19c0-2.76-2.67-5-6-5z"
+                  />
+                </svg>
+              </span>
+              <span>Nombre de usuario</span>
+            </label>
+            <input
+              id="username"
+              name="username"
+              type="text"
+              autocomplete="username"
+              placeholder="Introduce tu usuario"
+              required
+            />
+          </div>
+
+          <div class="form-field">
+            <label class="field-label" for="password">
+              <span class="field-icon" aria-hidden="true">
+                <!-- Ícone cadeado -->
+                <svg viewBox="0 0 24 24" class="icon">
+                  <path
+                    d="M17 9h-1V7a4 4 0 0 0-8 0v2H7a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2zm-7-2a2 2 0 1 1 4 0v2h-4V7zm7 11H7v-7h10v7z"
+                  />
+                </svg>
+              </span>
+              <span>Contraseña</span>
+            </label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              autocomplete="current-password"
+              placeholder="••••••••••"
+              required
+            />
+          </div>
+
+          <button type="submit" class="btn-primary">Iniciar sesión</button>
+       
+            <!-- MENSAGEM DE ERRO DE LOGIN -->
+            <p id="loginError" class="login-error">
+            Usuario o contraseña incorrectos.
+            </p>
+        </form>
+
+        <!-- FOOTER -->
+        <footer class="login-footer">
+          <p class="login-note">
+            La ubicación será registrada automáticamente al finalizar el fichaje.
+          </p>
+        </footer>
+      </section>
+
+      <!-- LOGO INFERIOR -->
+      <div class="brand-footer">
+        <span class="brand-logo">🤚</span>
+        <span class="brand-text">manomanitas.es</span>
+      </div>
+    </main>
+  </div>
+
+  <script src="login.js"></script>
+</body>
+</html>

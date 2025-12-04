@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fichaje - Inicio</title>
+    <link rel="stylesheet" href="./fichaje-inicio.css" />
+    <script type="module" src="../componentes/ui-button.js"></script>
+    <script type="module" src="../componentes/ui-pill.js"></script>
+  </head>
+
+<body>
+    <div class="overlay">
+        <div class="fichaje-container">
+
+            <!-- ===== CARD PRINCIPAL ===== -->
+            <div id="fichajeCard" class="fichaje-card state-sin-fichar">
+
+                <!-- ===== HEADER SUPERIOR ===== -->
+                <div class="fichaje-header">
+                    <div class="datetime-block">
+                        <span id="fechaText" class="fecha-text"></span>
+                        <span id="horaText" class="hora-text"></span>
+                    </div>
+
+                    <ui-pill id="statusPill" state="sin-fichar" label="SIN FICHAR"></ui-pill>
+                </div>
+
+                <!-- ===== SAUDAÇÃO ===== -->
+                <div class="fichaje-greeting">
+                    <h2 class="greeting-hello">
+                        Hola, <span id="nombreTecnico"></span>
+                    </h2>
+                </div>
+
+                <!-- Mensaje principal del estado -->
+                <div class="fichaje-message">
+                    <p id="mensajeTexto">No has realizado fichajes en el día de hoy.</p>
+                </div>
+
+                <!-- ===== STEP WIZARD ===== -->
+                <div id="stepper" class="stepper stepper-hidden">
+                    <div class="step-bars">
+                        <div class="step-bar"></div>
+                        <div class="step-bar"></div>
+                        <div class="step-bar"></div>
+                    </div>
+                    <span class="step-counter"><span id="stepActual">1</span>/3</span>
+                </div>
+
+                <!-- ===== VIEW: HOME ===== -->
+                <div id="stepHome" class="step-view step-view-active">
+
+                    <div class="fichaje-actions">
+                        <ui-button id="btnFicharEntrada" variant="primary" fullwidth>
+                            FICHAR ENTRADA AL TRABAJO
+                        </ui-button>
+
+                        <ui-button id="btnContinuarSistema" variant="secondary" fullwidth>
+                            CONTINUAR AL SISTEMA
+                        </ui-button>
+
+                        <ui-button id="btnCerrarSesion" variant="secondary" fullwidth>
+                            CERRAR SESION
+                        </ui-button>
+                    </div>
+
+                    <div class="fichaje-footer">
+                        <p class="fichaje-note">
+                            La ubicación será registrada automáticamente al finalizar el fichaje
+                        </p>
+                    </div>
+                </div>
+
+                <!-- ===== VIEW: EPIS ===== -->
+                <div id="stepEpis" class="step-view">
+
+                    <div class="wizard-section">
+                        <h2 class="wizard-title">EPIs de hoy</h2>
+                        <p class="wizard-subtitle">
+                            Sube al menos <strong>1 foto</strong> como evidencia.
+                        </p>
+
+                        <div id="episPendingAlert" class="wizard-alert wizard-alert-warning wizard-alert-hidden">
+                            Tienes EPIs <strong>pendientes</strong>. Puedes completarlos ahora o al final de la jornada.
+                        </div>
+
+                        <div id="episError" class="wizard-alert wizard-alert-error wizard-alert-hidden"></div>
+
+                        <div class="epis-uploads">
+                            <div id="episThumbs" class="epis-thumbs"></div>
+                            <div id="episCounter" class="epis-counter">0 fotos añadidas.</div>
+                        </div>
+
+                        <div class="wizard-button-row">
+                            <ui-button id="btnAddEpis" variant="secondary">
+                                <img src="https://cdn-icons-png.flaticon.com/512/126/126477.png" class="icono-epis" />
+                                Anadir fotos
+                            </ui-button>
+                            <input id="inputEpisFotos" type="file" class="hidden" multiple accept="image/*" />
+
+                            <ui-button id="btnPosponerEpis" variant="ghost">Posponer</ui-button>
+                        </div>
+
+                        <div class="wizard-footer-right">
+                            <ui-button id="btnConfirmarEpis" variant="primary">
+                                Confirmar y seguir ->
+                            </ui-button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== VIEW: SITIO ===== -->
+                <div id="stepSitio" class="step-view">
+                    <h2 class="wizard-title">¿Dónde trabajarás hoy?</h2>
+                    <p class="wizard-subtitle">
+                        Selecciona obra, ruta o sede asignada.
+                    </p>
+
+                    <div id="listaSitios" class="wizard-list"></div>
+
+                    <div class="wizard-footer-right">
+                        <ui-button id="btnConfirmarSitio" variant="primary" disabled>
+                            Confirmar sitio ->
+                        </ui-button>
+                    </div>
+                </div>
+
+                <!-- ===== VIEW: TRANSPORTE ===== -->
+                <div id="stepTransporte" class="step-view">
+                    <h2 class="wizard-title">Transporte de hoy</h2>
+                    <p class="wizard-subtitle">Indica si conducirás o irás de pasajero.</p>
+
+                    <div class="toggle-conduce">
+                        <button id="btnHoyConduzco" class="toggle-pill">🚗 Hoy conduzco</button>
+                        <button id="btnHoyNoConduzco" class="toggle-pill">👤 Hoy no conduzco</button>
+                    </div>
+
+                    <div id="listaVehiculos" class="wizard-list"></div>
+
+                    <div class="wizard-footer-right">
+                        <ui-button id="btnGuardarJornada" variant="success" disabled>
+                            Guardar y empezar jornada
+                        </ui-button>
+                    </div>
+                </div>
+
+                <!-- ===== VIEW: OPERANDO (ESTADO FINAL) ===== -->
+                <div id="stepOperando" class="step-view">
+                    <div class="fichaje-actions">
+                        <ui-button id="btnSalidaReceso" variant="primary" fullwidth>
+                            FICHAR SALIDA A RECESO
+                        </ui-button>
+
+                        <ui-button id="btnTerminarDia" variant="primary" fullwidth>
+                            TERMINAR DIA DE TRABAJO
+                        </ui-button>
+
+                        <ui-button id="btnContinuarSistemaOperando" variant="secondary" fullwidth>
+                            CONTINUAR AL SISTEMA
+                        </ui-button>
+
+                        <ui-button id="btnCerrarSesionOperando" variant="secondary" fullwidth>
+                            CERRAR SESION
+                        </ui-button>
+                    </div>
+
+                    <div class="fichaje-footer">
+                        <p class="fichaje-note">
+                            La ubicación será registrada automáticamente al finalizar el fichaje
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== BANNER ROXO ===== -->
+            <button id="bannerEpis" class="epis-banner epis-banner-hidden">
+                Tienes EPIs pendientes. Completar ahora
+            </button>
+
+            <!-- ===== RODAPÉ ===== -->
+            <div class="brand-footer">
+                <span class="brand-logo">🛠️</span>
+                <span class="brand-text">manomanitas.es</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="./fichaje-inicio.js"></script>
+</body>
+</html>
