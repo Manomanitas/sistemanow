@@ -1,0 +1,421 @@
+/* ============================================================
+   TOKENS / BASE
+============================================================ */
+:root {
+  --ui-card-bg: rgba(15, 23, 42, 0.92);
+  --ui-card-border: rgba(148, 163, 184, 0.25);
+  --ui-card-shadow: 0 20px 60px rgba(0, 0, 0, 0.75);
+  --ui-surface-soft: rgba(255, 255, 255, 0.06);
+  --ui-text: #f8fafc;
+  --ui-text-muted: #cbd5e1;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(30, 41, 59, 0.8) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: rgba(30, 41, 59, 0.9);
+  border-radius: 999px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(55, 65, 81, 0.95);
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    sans-serif;
+  color: var(--ui-text);
+}
+
+/* ============================================================
+   FUNDO
+============================================================ */
+body {
+  min-height: 100vh;
+  background-image: url("../assets/images/ciudad-de-les-artes.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    rgba(2, 6, 23, 0.8),
+    radial-gradient(
+      circle at top left,
+      rgba(15, 23, 42, 0.95),
+      rgba(15, 23, 42, 0.55) 60%,
+      rgba(15, 23, 42, 0.4) 100%
+    );
+  background-blend-mode: multiply;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ============================================================
+   LAYOUT
+============================================================ */
+.app-shell {
+  min-height: 100%;
+  display: flex;
+}
+
+.main-area {
+  flex: 1;
+  display: flex;
+}
+
+.main-overlay {
+  flex: 1;
+  background: rgba(2, 6, 23, 0.6);
+  backdrop-filter: blur(2px);
+  padding: 26px 32px;
+  display: flex;
+  justify-content: center;
+}
+
+.main-inner {
+  width: 100%;
+  max-width: 1180px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ============================================================
+   CARDS
+============================================================ */
+.glass-card {
+  border-radius: 24px;
+  border: 1px solid var(--ui-card-border);
+  background: var(--ui-card-bg);
+  box-shadow: var(--ui-card-shadow);
+  backdrop-filter: blur(20px);
+  padding: 18px 20px;
+}
+
+/* HEADER */
+.tools-header-card {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.tools-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tools-kicker {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ui-text-muted);
+}
+
+.tools-title {
+  margin: 0;
+  font-size: 28px;
+  letter-spacing: -0.02em;
+}
+
+.tools-subtitle {
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: var(--ui-text-muted);
+  max-width: 620px;
+}
+
+/* ============================================================
+   FILTROS / AÇÕES
+============================================================ */
+.tools-filters-card {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1.2fr) minmax(0, 1.4fr) auto;
+  gap: 16px;
+  align-items: end;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field label {
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ui-text-muted);
+}
+
+.field-input-wrap {
+  position: relative;
+}
+
+.field-icon {
+  position: absolute;
+  inset-block: 0;
+  left: 10px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+.field input,
+.field select {
+  width: 100%;
+  padding: 10px 12px 10px 30px;
+  border-radius: 16px;
+  border: 1px solid var(--ui-card-border);
+  background: var(--ui-surface-soft);
+  color: var(--ui-text);
+  font-size: 14px;
+}
+
+.field select {
+  padding-left: 12px;
+}
+
+.field input::placeholder {
+  color: rgba(226, 232, 240, 0.7);
+}
+
+.tools-actions-right {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+/* BOTÕES */
+.btn {
+  border-radius: 999px;
+  padding: 9px 18px;
+  font-size: 12px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+}
+
+.btn-primary {
+  background: #007aff;
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background: #0060d6;
+  transform: translateY(-1px);
+}
+
+.btn-ghost {
+  background: rgba(15, 23, 42, 0.92);
+  color: #e5e7eb;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+}
+
+.btn-ghost:hover {
+  background: rgba(30, 64, 94, 0.9);
+}
+
+/* ============================================================
+   TABELA
+============================================================ */
+.tools-table-card {
+  padding: 0;
+  overflow: hidden;
+}
+
+.tools-table-header {
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  background: rgba(15, 23, 42, 0.95);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+}
+
+.tools-table-meta {
+  font-size: 13px;
+  color: var(--ui-text-muted);
+}
+
+.tools-table-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.pill-toggle {
+  border: none;
+  background: transparent;
+  padding: 0;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.pill-toggle.is-active ui-pill {
+  box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.8);
+}
+
+.tools-table-scroll {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.tools-table {
+  width: 100%;
+  min-width: 1100px;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.tools-table thead tr {
+  background: rgba(15, 23, 42, 0.98);
+}
+
+.tools-table th {
+  padding: 10px 12px;
+  text-align: left;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(148, 163, 184, 0.95);
+  border-bottom: 1px solid rgba(148, 163, 184, 0.4);
+}
+
+.tools-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+  color: #e5e7eb;
+}
+
+.tools-table tbody tr:hover {
+  background: rgba(15, 23, 42, 0.96);
+}
+
+.tool-name {
+  font-weight: 500;
+}
+
+/* Thumbnail */
+.tool-thumb {
+  height: 34px;
+  width: 34px;
+  border-radius: 12px;
+  background: radial-gradient(circle at top left, #0ea5e9, #0369a1);
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* FOOTER + PAGINAÇÃO */
+.tools-table-footer {
+  padding: 10px 16px 12px;
+  background: rgba(15, 23, 42, 0.98);
+  border-top: 1px solid rgba(148, 163, 184, 0.35);
+  font-size: 12px;
+  color: var(--ui-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.tools-pagination {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pager-btn {
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  background: rgba(15, 23, 42, 0.85);
+  color: #e5e7eb;
+  padding: 6px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.12s ease, transform 0.12s ease, border 0.12s ease;
+}
+
+.pager-btn:hover:not(:disabled) {
+  background: rgba(30, 64, 94, 0.95);
+  transform: translateY(-1px);
+}
+
+.pager-btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.tools-page-indicator {
+  font-size: 12px;
+  color: var(--ui-text-muted);
+}
+
+/* ============================================================
+   RESPONSIVO
+============================================================ */
+@media (max-width: 1024px) {
+  .main-overlay {
+    padding: 20px 16px;
+  }
+
+  .tools-filters-card {
+    grid-template-columns: minmax(0, 1.8fr) minmax(0, 1fr);
+  }
+
+  .tools-actions-right {
+    justify-content: flex-start;
+  }
+
+  .tools-table-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 768px) {
+  .tools-header-card {
+    flex-direction: column;
+  }
+
+  .tools-filters-card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .main-overlay {
+    padding: 18px 12px;
+  }
+}

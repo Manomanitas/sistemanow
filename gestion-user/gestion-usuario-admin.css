@@ -1,24 +1,49 @@
+/* ===========================
+   GESTION-USUARIO-ADMIN · LAYOUT GLOBAL
+   Fundo igual ao panel-obras (Ciudad de las Artes + overlay escuro)
+   =========================== */
+
 html,
 body {
   margin: 0;
   padding: 0;
   height: 100%;
   width: 100%;
-  background-image: url("../assets/images/ciudad-de-les-artes.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  background: #020617; /* cor base por baixo da imagem */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    sans-serif;
 }
 
-#root {
+/* Fundo da página (mesma imagem de todas as telas) */
+body {
   min-height: 100vh;
-  background-image: url("../assets/images/ciudad-de-les-artes.png");
+  background-image: url("./assets/images/ciudad-de-les-artes.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  color: #f9fafb;
+  position: relative;
+}
+
+/* 🔥 Película escura EXATAMENTE igual ao panel-obras */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+      circle at top left,
+      rgba(15, 23, 42, 0.85),
+      rgba(15, 23, 42, 0.55)
+    ),
+    rgba(2, 6, 23, 0.78);
+  pointer-events: none;
+  z-index: -1; /* fica acima do background, abaixo de todo o conteúdo */
+}
+
+/* root só precisa garantir altura mínima; o fundo vem do body + overlay */
+#root {
+  min-height: 100vh;
 }
 
 /* Remove padding extra do layout com navbar para evitar faixa vazia na base */
@@ -32,46 +57,43 @@ body.page-with-nav {
   height: 6px;
   width: 6px;
 }
+
 .table-scroll::-webkit-scrollbar-track,
 .generic-scroll::-webkit-scrollbar-track {
   background: rgba(15, 23, 42, 0.8);
 }
+
 .table-scroll::-webkit-scrollbar-thumb,
 .generic-scroll::-webkit-scrollbar-thumb {
   background: rgba(148, 163, 184, 0.8);
   border-radius: 999px;
 }
+
 .table-scroll::-webkit-scrollbar-thumb:hover,
 .generic-scroll::-webkit-scrollbar-thumb:hover {
   background: rgba(226, 232, 240, 0.9);
 }
 
-/* Scrollbar unificado (SistemaNow) */
+/* Scrollbar unificado (SistemaNow) global */
 * {
   scrollbar-width: thin;
   scrollbar-color: #034fa7 transparent;
 }
+
 *::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
+
 *::-webkit-scrollbar-track {
   background: transparent;
 }
+
 *::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, #0ea5e9, #22d3ee);
   border-radius: 999px;
 }
+
 *::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(180deg, #38bdf8, #0ea5e9);
-}
-
-/* Fundo unificado (ciudad de les artes) */
-body {
-  min-height: 100vh;
-  color: #f9fafb;
-  position: relative;
-}
-body::before {
-  content: none;
 }

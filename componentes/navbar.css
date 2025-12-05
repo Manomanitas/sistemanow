@@ -298,11 +298,25 @@ body.page-with-nav {
 
 /* ATIVO – desktop: só pill verde + ícone branco */
 
-.nav-item.is-active .nav-icon-pill {
+.nav-item.is-active,
+.nav-item.nav-item-active {
+  background: var(--nav-accent-soft);
+  color: var(--nav-text);
+  box-shadow: 0 14px 32px rgba(22, 163, 74, 0.22);
+}
+
+.nav-item.is-active .nav-label,
+.nav-item.nav-item-active .nav-label {
+  color: var(--nav-text);
+}
+
+.nav-item.is-active .nav-icon-pill,
+.nav-item.nav-item-active .nav-icon-pill {
   background: var(--nav-accent);
 }
 
-.nav-item.is-active .nav-svg {
+.nav-item.is-active .nav-svg,
+.nav-item.nav-item-active .nav-svg {
   color: #ecfdf5;
 }
 
@@ -420,12 +434,14 @@ body.page-with-nav {
   margin: 0 auto;
 }
 
-.nav-shell:not(.open) .nav-item.is-active {
+.nav-shell:not(.open) .nav-item.is-active,
+.nav-shell:not(.open) .nav-item.nav-item-active {
   background: transparent;
   box-shadow: none;
 }
 
-.nav-shell:not(.open) .nav-item.is-active .nav-icon-pill {
+.nav-shell:not(.open) .nav-item.is-active .nav-icon-pill,
+.nav-shell:not(.open) .nav-item.nav-item-active .nav-icon-pill {
   background: var(--nav-accent);
 }
 
@@ -755,11 +771,13 @@ body {
 
 /* ATIVO – desktop */
 
-.nav-item.is-active .nav-icon-pill {
+.nav-item.is-active .nav-icon-pill,
+.nav-item.nav-item-active .nav-icon-pill {
   background: var(--nav-accent);
 }
 
-.nav-item.is-active .nav-svg {
+.nav-item.is-active .nav-svg,
+.nav-item.nav-item-active .nav-svg {
   color: #ecfdf5;
 }
 
@@ -876,12 +894,14 @@ body {
   margin: 0 auto;
 }
 
-.nav-shell:not(.open) .nav-item.is-active {
+.nav-shell:not(.open) .nav-item.is-active,
+.nav-shell:not(.open) .nav-item.nav-item-active {
   background: transparent;
   box-shadow: none;
 }
 
-.nav-shell:not(.open) .nav-item.is-active .nav-icon-pill {
+.nav-shell:not(.open) .nav-item.is-active .nav-icon-pill,
+.nav-shell:not(.open) .nav-item.nav-item-active .nav-icon-pill {
   background: var(--nav-accent);
 }
 
@@ -1056,22 +1076,26 @@ body {
   }
 
   /* ITEM ATIVO = pill azul com ícone + texto branco */
-  .nav-item.is-active {
+  .nav-item.is-active,
+  .nav-item.nav-item-active {
     background: var(--mobile-pill-bg);
     color: #ffffff;
     box-shadow: 0 8px 18px rgba(37, 99, 235, 0.45);
     padding: 0 16px;           /* pill um pouco maior só no ativo */
   }
 
-  .nav-item.is-active .nav-svg {
+  .nav-item.is-active .nav-svg,
+  .nav-item.nav-item-active .nav-svg {
     color: #ffffff;
   }
 
-  .nav-item.is-active .nav-label {
+  .nav-item.is-active .nav-label,
+  .nav-item.nav-item-active .nav-label {
     display: block;
   }
 
-  .nav-item.is-active::before {
+  .nav-item.is-active::before,
+  .nav-item.nav-item-active::before {
     content: none;
   }
 

@@ -333,6 +333,14 @@ function buildCalendar(date) {
   }
 }
 
+const btnHerramientas = document.getElementById("btnHerramientas");
+
+if (btnHerramientas) {
+  btnHerramientas.addEventListener("click", () => {
+    window.location.href = "../herramientas/herramientas-panel.html";
+  });
+}
+
 const btnCrearObra = document.getElementById("btnCrearObra");
 
 if (btnCrearObra) {

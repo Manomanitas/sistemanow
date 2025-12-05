@@ -9,8 +9,8 @@ const COLORS = {
   danger: "#EF4444",
   muted: "rgba(255,255,255,0.35)",
   avatar: "#FF611A",
-  border: "rgba(148,163,184,0.25)",
-  glass: "rgba(15,23,42,0.92)",
+  border: "rgba(255,255,255,0.15)",
+  glass: "rgba(15,23,42,0.68)",
 };
 
 
@@ -31,26 +31,26 @@ const SUBESTADOS = [
   "Completada",
   "Moroso",
 ];
+
 // A que "estado de servicio" se asocia cada sub-estado (para color)
 const SUBESTADO_TONE = {
-  "A Presupuestar": "nuevo",       // azul
-  "Presupuestado": "aceptado",   // verde
-  "Citado": "citado",            // amarillo
-  "En Espera": "citado",         // amarillo
-  "En Curso": "aceptado",        // verde
-  "En Curso Reparos": "aceptado",// verde
-  "Pendiente de Firma Remota": "citado",   // amarillo
-  "Pendiente de Pedido": "oficina",        // morado
-  "Facturado": "aceptado",       // verde
-  "Pendiente de Cobro": "cobro", // morado cobro
-  "Confirming": "cobro",         // morado cobro
-  "Pagado": "pagado",            // verde forte
-  "Completada": "finalizado",    // verde finalizado
-  "Moroso": "moroso",            // rojo
+  "A Presupuestar": "nuevo",
+  Presupuestado: "aceptado",
+  Citado: "citado",
+  "En Espera": "citado",
+  "En Curso": "aceptado",
+  "En Curso Reparos": "aceptado",
+  "Pendiente de Firma Remota": "citado",
+  "Pendiente de Pedido": "oficina",
+  Facturado: "aceptado",
+  "Pendiente de Cobro": "cobro",
+  Confirming: "cobro",
+  Pagado: "pagado",
+  Completada: "finalizado",
+  Moroso: "moroso",
 };
 
 function getSubestadoStyle(nombre) {
-  // estado neutro (sem sub-estado)
   if (!nombre) {
     return {
       bg: "bg-emerald-500/20",
@@ -91,21 +91,21 @@ function getSubestadoStyle(nombre) {
         text: "text-amber-100",
         dot: "bg-amber-400",
       };
-    case "oficina": // morado "GESTIÓN DE OFICINA"
+    case "oficina": // roxo/indigo "GESTIÓN DE OFICINA"
       return {
         bg: "bg-indigo-500/18",
         border: "border-indigo-400/70",
         text: "text-indigo-100",
         dot: "bg-indigo-400",
       };
-    case "cobro": // morado "ESTADO DE COBRO"
+    case "cobro": // fúcsia "ESTADO DE COBRO"
       return {
         bg: "bg-fuchsia-500/18",
         border: "border-fuchsia-400/70",
         text: "text-fuchsia-100",
         dot: "bg-fuchsia-400",
       };
-    case "pagado": // verde forte "PAGADO"
+    case "pagado": // verde pago
       return {
         bg: "bg-green-500/25",
         border: "border-green-400/80",
@@ -128,7 +128,6 @@ function getSubestadoStyle(nombre) {
       };
   }
 }
-
 
 function Frosted({ children, className = "", blur = 18, style = {} }) {
   return (
@@ -173,9 +172,13 @@ function Button({ children, tone = "primary", className = "", ...rest }) {
 
 // ================== HELPERS ==================
 function computeInitials(name = "") {
-  const parts = String(name).trim().split(/\s+/).filter(Boolean);
+  const parts = String(name)
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean);
   const pick = (s, i = 0) => (s?.[i] || "").toUpperCase();
-  if (parts.length >= 2) return pick(parts[0]) + (pick(parts[1]) || pick(parts[1], 1));
+  if (parts.length >= 2)
+    return pick(parts[0]) + (pick(parts[1]) || pick(parts[1], 1));
   if (parts.length === 1) return pick(parts[0]) + pick(parts[0], 1);
   return "";
 }
@@ -219,16 +222,14 @@ function Avatar({ name = "", status }) {
 function Timeline({ etapas, activo }) {
   return (
     <div className="relative px-4 py-3">
-      {/* container com scroll horizontal e respiro para o scrollbar */}
       <div className="flex items-center gap-6 overflow-x-auto hide-scroll pb-4">
         {etapas.map((etapa, idx) => {
-          const done = idx < activo;       // concluído
-          const isActive = idx === activo; // estado atual (azul)
+          const done = idx < activo;
+          const isActive = idx === activo;
 
           return (
             <div key={etapa} className="min-w-[120px] flex items-center">
               <div className="relative flex flex-col items-center text-center">
-                {/* bolinha de estado */}
                 <div
                   className={
                     "h-3.5 w-3.5 rounded-full border shadow-sm transition " +
@@ -253,7 +254,6 @@ function Timeline({ etapas, activo }) {
                 </div>
               </div>
 
-              {/* linha ligando etapas */}
               {idx < etapas.length - 1 && (
                 <div
                   className="h-[2px] flex-1 ml-3 rounded-full"
@@ -302,8 +302,7 @@ function OrdenDeTrabajoV3() {
     contacto: params.get("contacto") || null,
     telefono: params.get("telefono") || null,
     cliente: params.get("cliente") || "TELDOMO",
-    direccion:
-      params.get("direccion") || "Calle Jesús 12, 46007 — Valencia",
+    direccion: params.get("direccion") || "Calle Jesús 12, 46007 — Valencia",
   };
 
   const API_BASE = window.MANO_API_BASE || "/api";
@@ -316,23 +315,21 @@ function OrdenDeTrabajoV3() {
   const [orden, setOrden] = useState(null);
   const [tecnicosHeader, setTecnicosHeader] = useState([]);
 
-  // NOVA ordem de estados da timeline (ESTADO DE SERVICIO)
   const [etapas] = useState([
-    "Nuevo",              // 1
-    "Aceptado",           // 2
-    "Cancelado",          // 3
-    "Citado",             // 4
-    "Gestión de oficina", // 5
-    "Estado de cobro",    // 6
-    "Finalizado",         // 7
-    "Moroso",             // 8
-    "Garantía",           // 9
+    "Nuevo",
+    "Aceptado",
+    "Cancelado",
+    "Citado",
+    "Gestión de oficina",
+    "Estado de cobro",
+    "Finalizado",
+    "Moroso",
+    "Garantía",
   ]);
 
-  const [timelineIndex, setTimelineIndex] = useState(2); // por ex: "Cancelado"
+  const [timelineIndex, setTimelineIndex] = useState(2);
 
-  // sub-estado atual do estado principal
-  const [subEstadoIndex, setSubEstadoIndex] = useState(-1); // -1 = sem sub-estado selecionado
+  const [subEstadoIndex, setSubEstadoIndex] = useState(-1);
 
   const [coste, setCoste] = useState([]);
   const [tareas, setTareas] = useState([]);
@@ -343,13 +340,11 @@ function OrdenDeTrabajoV3() {
   const [garantias, setGarantias] = useState([]);
 
   const [lastSync, setLastSync] = useState(new Date());
-  // helpers de estado / sub-estado (global)
+
   const estadoActual = etapas[timelineIndex];
   const subEstadoTexto =
-    subEstadoIndex < 0
-      ? "Sin sub-estado"
-      : SUBESTADOS[subEstadoIndex];
-  // opcional: sempre que mudar o estado principal, resetar o sub-estado
+    subEstadoIndex < 0 ? "Sin sub-estado" : SUBESTADOS[subEstadoIndex];
+
   useEffect(() => {
     setSubEstadoIndex(-1);
   }, [timelineIndex]);
@@ -468,8 +463,8 @@ function OrdenDeTrabajoV3() {
         );
         setTecnicosTabla(
           tf || [
-            { nombre: "JORGE COY",      cargo: "TÉCNICO" },
-            { nombre: "LUIS RAMOS",     cargo: "TÉCNICO" },
+            { nombre: "JORGE COY", cargo: "TÉCNICO" },
+            { nombre: "LUIS RAMOS", cargo: "TÉCNICO" },
             { nombre: "CATALIN ANGELO", cargo: "TÉCNICO" },
           ]
         );
@@ -507,20 +502,20 @@ function OrdenDeTrabajoV3() {
     })();
     return () => (mounted = false);
   }, []);
+
   function handleVolverObraPrincipal() {
     window.location.href = "../panel-obras/panel-obras.html";
   }
-  // clique no chip de "En tiempo real" para ciclar sub-estados
+
   function handleClickSubEstado() {
     if (!SUBESTADOS.length) return;
-
     setSubEstadoIndex((prev) => {
-      if (prev < 0) return 0; // primeiro clique -> primeiro sub-estado
+      if (prev < 0) return 0;
       const next = prev + 1;
-      return next >= SUBESTADOS.length ? 0 : next; // loop global
+      return next >= SUBESTADOS.length ? 0 : next;
     });
   }
-  // =========== SUBCOMPONENTES ===========
+
   function Header() {
     const hasSub = subEstadoIndex >= 0;
     const { bg, border, text, dot } = getSubestadoStyle(
@@ -529,7 +524,6 @@ function OrdenDeTrabajoV3() {
     return (
       <Frosted className="p-4">
         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-          {/* Esquerda: info obra */}
           <div className="text-white">
             <div className="text-[12px] md:text-[13px] opacity-70">
               PANEL DE GESTIÓN · OBRA
@@ -548,15 +542,17 @@ function OrdenDeTrabajoV3() {
             </div>
           </div>
 
-          {/* Direita: estado realtime, sync, avatares, voltar */}
           <div className="flex flex-col items-end gap-2 text-xs">
-            {/* Indicador de sub-estado clicável */}
             <button
               type="button"
               onClick={handleClickSubEstado}
               className={
                 "flex items-center gap-2 px-3 py-1 rounded-full border transition " +
-                bg + " " + border + " " + text
+                bg +
+                " " +
+                border +
+                " " +
+                text
               }
             >
               <span className={"h-2 w-2 rounded-full animate-pulse " + dot} />
@@ -566,8 +562,7 @@ function OrdenDeTrabajoV3() {
               </span>
             </button>
             <div className="opacity-70">
-              Última sincronización:{" "}
-              {lastSync.toLocaleTimeString("es-ES")}
+              Última sincronización: {lastSync.toLocaleTimeString("es-ES")}
             </div>
 
             <div className="flex items-center gap-2 mt-1">
@@ -635,18 +630,15 @@ function OrdenDeTrabajoV3() {
               className="rounded-xl overflow-hidden border"
               style={{ borderColor: COLORS.border }}
             >
-              <img
-                src={f.src}
-                className="w-full h-[220px] object-cover"
-              />
+              <img src={f.src} className="w-full h-[220px] object-cover" />
               <div className="px-3 py-1 text-[11px] text-white/70">
                 {f.autor} — {f.fecha}
               </div>
             </div>
           ))}
           <div className="text-[11px] px-3 py-1 rounded-xl bg-amber-200/70 text-black w-fit">
-            {(actividadFotos[0]?.autor || "Técnico")} ha cargado el
-            archivo conforme del trabajo realizado — {orden?.fecha} 16:58
+            {(actividadFotos[0]?.autor || "Técnico")} ha cargado el archivo
+            conforme del trabajo realizado — {orden?.fecha} 16:58
           </div>
           <div
             className="flex items-center gap-2 pt-1 border-t"
@@ -1016,8 +1008,7 @@ function OrdenDeTrabajoV3() {
             <Frosted className="p-3 text-white/85" blur={20}>
               <div className="text-xs opacity-70 mb-1">Información</div>
               <div className="text-sm">
-                Cliente comunica que aire acondicionado ha dejado de
-                funcionar
+                Cliente comunica que aire acondicionado ha dejado de funcionar
               </div>
             </Frosted>
 
@@ -1067,12 +1058,12 @@ function OrdenDeTrabajoV3() {
     );
   }
 
-  // =========== LAYOUT PRINCIPAL ===========
+  // =========== LAYOUT PRINCIPAL (FUNDO + CENTRALIZAÇÃO) ===========
   return (
-    <div className="min-h-screen w-full bg-[url('../assets/images/ciudad-de-les-artes.png')] bg-cover bg-center">
+    <div className="relative min-h-screen w-full bg-[url('../assets/images/ciudad-de-les-artes.png')] bg-cover bg-center">
       <div className="min-h-screen w-full bg-black/70 flex flex-col items-center px-4 py-6 text-white">
-        {/* Container mais estreito + colunas com proporção melhor */}
-        <div className="w-full max-w-[1120px] flex flex-col lg:flex-row gap-4">
+        {/* Container central com mesma largura do panel-obras */}
+        <div className="w-full max-w-[1180px] flex flex-col lg:flex-row gap-4">
           {/* Coluna principal */}
           <div className="w-full lg:w-[740px] space-y-3">
             <Header />
@@ -1136,5 +1127,6 @@ function OrdenDeTrabajoV3() {
 }
 
 // ===== MONTAR NO ROOT =====
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const rootEl = document.getElementById("root");
+const root = ReactDOM.createRoot(rootEl);
 root.render(<OrdenDeTrabajoV3 />);

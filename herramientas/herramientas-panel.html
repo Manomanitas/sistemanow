@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Herramientas · Inventario</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Tailwind para reset/utilidades (como nas outras telas) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- CSS próprio -->
+    <link rel="stylesheet" href="../componentes/navbar.css" />
+    <link rel="stylesheet" href="herramientas-panel.css" />
+
+    <!-- Web components / Navbar -->
+    <script type="module" src="../componentes/ui-pill.js"></script>
+    <script type="module" src="../componentes/ui-button.js"></script>
+    <script src="../componentes/navbar.js" defer></script>
+  </head>
+
+  <body class="page-with-nav">
+    <!-- NAV LATERAL -->
+    <nav class="nav-shell" id="navShell">
+      <div class="nav-inner">
+        <!-- HEADER -->
+        <div class="nav-header">
+          <div class="nav-logo">
+            <span>SN</span>
+          </div>
+          <div class="nav-header-text">
+            <span class="nav-app-name">SistemaNow</span>
+            <span class="nav-app-subtitle">Inventario</span>
+          </div>
+          <button
+            class="nav-toggle"
+            id="navToggle"
+            aria-label="Abrir menú lateral"
+          >
+            <span class="nav-toggle-bar"></span>
+          </button>
+        </div>
+
+        <!-- SEARCH -->
+        <div class="nav-search">
+          <div class="nav-search-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" class="nav-svg">
+              <path
+                d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79L19 20.5 20.5 19l-5-5Zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14Z"
+                fill="currentColor"
+              />
+            </svg>
+          </div>
+          <input type="text" placeholder="Buscar..." />
+        </div>
+
+        <!-- LINKS PRINCIPAIS -->
+        <div class="nav-center">
+          <ul class="nav-links">
+            <li
+              class="nav-item"
+              data-link="../pantalla-principal/pantalla-principal.html"
+            >
+              <span class="nav-icon-pill" aria-hidden="true">
+                <svg viewBox="0 0 24 24" class="nav-svg">
+                  <path
+                    d="M4 10.25L12 3l8 7.25V20a1 1 0 0 1-1 1h-5v-5h-4v5H5a1 1 0 0 1-1-1v-9.75Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </span>
+              <span class="nav-label">Inicio</span>
+            </li>
+
+            <li class="nav-item" data-link="../perfil-tec/perfil-tecnico.html">
+              <span class="nav-icon-pill" aria-hidden="true">
+                <svg viewBox="0 0 24 24" class="nav-svg">
+                  <path
+                    d="M12 2a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 12c-4.418 0-8 2.239-8 5v1h16v-1c0-2.761-3.582-5-8-5Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </span>
+              <span class="nav-label">Perfil técnico</span>
+            </li>
+
+            <li class="nav-item" data-link="../panel-user/usuarios-panel.html">
+              <span class="nav-icon-pill" aria-hidden="true">
+                <svg viewBox="0 0 24 24" class="nav-svg">
+                  <path
+                    d="M4 6a2 2 0 0 1 2-2h12a1 1 0 0 1 .96 1.27l-2 7A1 1 0 0 1 16 13H8.618l-.5 2H17v2H7a2 2 0 0 1-1.94-2.5L6.62 6H4Zm5.236 0-1 4H15.8l1.143-4H9.236Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </span>
+              <span class="nav-label">Usuarios</span>
+            </li>
+
+            <!-- HERRAMIENTAS (ATIVA) -->
+            <li
+              class="nav-item is-active"
+              data-link="../herramientas/herramientas-panel.html"
+            >
+              <span class="nav-icon-pill" aria-hidden="true">
+                <svg viewBox="0 0 24 24" class="nav-svg">
+                  <path
+                    d="M21 7.5 18.5 10l-2-2L19 5.5a4 4 0 0 0-5.66-.1L10 8.75 6.75 5.5l-2 2L8 10.75 4.9 13.9a2.5 2.5 0 0 0 .2 3.53l1.47 1.47a2.5 2.5 0 0 0 3.53.2L13.25 16l3.25 3.25 2-2L15 14l3.35-3.35A4 4 0 0 0 21 7.5Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </span>
+              <span class="nav-label">Herramientas</span>
+            </li>
+
+            <li class="nav-item" data-link="../orden-trab/orden-trabajo-v3-tabs.html">
+              <span class="nav-icon-pill" aria-hidden="true">
+                <svg viewBox="0 0 24 24" class="nav-svg">
+                  <path
+                    d="M7 3a2 2 0 0 0-2 2v15h14V5a2 2 0 0 0-2-2H7Zm2 3h6v2H9V6Zm0 4h6v2H9v-2Zm0 4h4v2H9v-2Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </span>
+              <span class="nav-label">Órdenes de trabajo</span>
+            </li>
+
+            <li class="nav-item" data-link="../fichajes/fichaje-inicio.html">
+              <span class="nav-icon-pill" aria-hidden="true">
+                <svg viewBox="0 0 24 24" class="nav-svg">
+                  <path
+                    d="M12 2a9 9 0 1 0 9 9 9.01 9.01 0 0 0-9-9Zm0 2a7 7 0 1 1-7 7 7.008 7.008 0 0 1 7-7Zm-.5 3h1.5v4.25l3 1.75-.75 1.3L11.5 12V7Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </span>
+              <span class="nav-label">Fichajes</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- BASE / USUARIO -->
+        <div class="nav-bottom">
+          <button class="nav-item nav-home" type="button" id="navBackBtn">
+            <span class="nav-icon-pill" aria-hidden="true">
+              <svg viewBox="0 0 24 24" class="nav-svg">
+                <path
+                  d="M15.5 4.5 8 12l7.5 7.5"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+            <span class="nav-label">Volver atrás</span>
+          </button>
+
+          <div class="nav-footer">
+            <div class="nav-avatar">EA</div>
+            <div class="nav-footer-meta">
+              <span class="nav-user-name">Eduardo Augusto</span>
+              <span class="nav-user-role">Oficina</span>
+              <ui-pill state="operando" label="OPERANDO"></ui-pill>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <div class="app-shell sidebar-expanded" id="appShell">
+      <main class="main-area">
+        <div class="main-overlay">
+          <div class="main-inner">
+            <!-- HEADER -->
+            <section class="glass-card tools-header-card">
+              <div class="tools-header-left">
+                <div>
+                  <div class="tools-kicker">INVENTARIO</div>
+                  <h1 class="tools-title">Herramientas</h1>
+                  <p class="tools-subtitle">
+                    Vista general del inventario de herramientas, su estado,
+                    ubicación y responsable. Usa los filtros para encontrar
+                    rápido lo que necesitas.
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            <!-- FILTROS / ACCIONES -->
+            <section class="glass-card tools-filters-card">
+              <div class="field">
+                <label for="searchHerr">Buscar herramienta</label>
+                <div class="field-input-wrap">
+                  <span class="field-icon" aria-hidden="true">
+                    🔍
+                  </span>
+                  <input
+                    id="searchHerr"
+                    type="text"
+                    placeholder="Nombre, código interno, responsable..."
+                  />
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="filterEstado">Estado</label>
+                <select id="filterEstado">
+                  <option value="todos">Todos</option>
+                  <option value="taller">Taller</option>
+                  <option value="furgo">En furgo</option>
+                  <option value="tecnico">Asignada a técnico</option>
+                  <option value="por-recibir">Por recibir</option>
+                  <option value="indisponible">Indisponible</option>
+                  <option value="devolucion">Devolución</option>
+                  <option value="solicitada">Solicitada</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="filterUbicacion">Ubicación</label>
+                <select id="filterUbicacion">
+                  <option value="todas">Todas</option>
+                  <option value="almacen">Almacén central</option>
+                  <option value="obras">En obra</option>
+                  <option value="furgo">Furgo</option>
+                  <option value="tecnico">Con técnico</option>
+                </select>
+              </div>
+
+              <div class="tools-actions-right">
+                <button class="btn btn-ghost" type="button">
+                  Categorías
+                </button>
+                <button class="btn btn-ghost" type="button">
+                  Asignaciones
+                </button>
+                <button class="btn btn-ghost" type="button">
+                  Exportar Excel
+                </button>
+                <button class="btn btn-primary" type="button">
+                  + Añadir herramienta
+                </button>
+              </div>
+            </section>
+
+            <!-- TABELA -->
+            <section class="glass-card tools-table-card">
+              <header class="tools-table-header">
+                <div class="tools-table-meta" id="toolsCountVisible">
+                  Mostrando 0 herramientas
+                </div>
+                <div class="tools-table-filters">
+                  <button
+                    class="pill-toggle is-active"
+                    data-filter-quick="todas"
+                  >
+                    <ui-pill state="neutral" label="Todas"></ui-pill>
+                  </button>
+                  <button class="pill-toggle" data-filter-quick="taller">
+                    <ui-pill state="receso" label="Taller"></ui-pill>
+                  </button>
+                  <button class="pill-toggle" data-filter-quick="furgo">
+                    <ui-pill state="operando" label="En furgo"></ui-pill>
+                  </button>
+                  <button class="pill-toggle" data-filter-quick="tecnico">
+                    <ui-pill state="operando" label="Con técnico"></ui-pill>
+                  </button>
+                  <button
+                    class="pill-toggle"
+                    data-filter-quick="incidencias"
+                  >
+                    <ui-pill state="baja" label="Incidencias"></ui-pill>
+                  </button>
+                </div>
+              </header>
+
+              <div class="tools-table-scroll">
+                <table class="tools-table">
+                  <thead>
+                    <tr>
+                      <th>Foto</th>
+                      <th>Herramienta</th>
+                      <th>Categoría</th>
+                      <th>Código</th>
+                      <th>Ubicación</th>
+                      <th>Responsable</th>
+                      <th>Estado</th>
+                      <th>Stock</th>
+                    </tr>
+                  </thead>
+                  <tbody id="toolsTableBody">
+                    <!-- EXEMPLOS (TODOS OS ESTADOS) -->
+                    <tr
+                      class="tool-row"
+                      data-state="por-recibir"
+                      data-ubicacion="almacen"
+                      data-text="TALADRO SDS BOSCH GBH 2-26 POR RECIBIR ALMACEN"
+                    >
+                      <td><div class="tool-thumb"><span>TB</span></div></td>
+                      <td class="tool-name">Taladro SDS Bosch GBH 2-26</td>
+                      <td>Perforación</td>
+                      <td>HZ-001</td>
+                      <td>Almacén central</td>
+                      <td>ALMACÉN</td>
+                      <td>
+                        <ui-pill state="receso" label="Por recibir"></ui-pill>
+                      </td>
+                      <td>3 uds</td>
+                    </tr>
+
+                    <tr
+                      class="tool-row"
+                      data-state="taller"
+                      data-ubicacion="almacen"
+                      data-text="MARTILLO DEMOLEDOR MAKITA HM1203 TALLER"
+                    >
+                      <td><div class="tool-thumb"><span>MD</span></div></td>
+                      <td class="tool-name">
+                        Martillo demoledor Makita HM1203
+                      </td>
+                      <td>Demolición</td>
+                      <td>HZ-014</td>
+                      <td>Taller / servicio técnico</td>
+                      <td>Servicio externo</td>
+                      <td>
+                        <ui-pill state="receso" label="Taller"></ui-pill>
+                      </td>
+                      <td>1 ud</td>
+                    </tr>
+
+                    <tr
+                      class="tool-row"
+                      data-state="furgo"
+                      data-ubicacion="furgo"
+                      data-text="NIVEL LASER DEWALT DCE089 EN FURGO FURGONETA 3"
+                    >
+                      <td><div class="tool-thumb"><span>NL</span></div></td>
+                      <td class="tool-name">Nivel láser DeWalt DCE089</td>
+                      <td>Medición</td>
+                      <td>HZ-032</td>
+                      <td>Furgo #3</td>
+                      <td>Equipo obra</td>
+                      <td>
+                        <ui-pill state="operando" label="En furgo"></ui-pill>
+                      </td>
+                      <td>1 ud</td>
+                    </tr>
+
+                    <tr
+                      class="tool-row"
+                      data-state="tecnico"
+                      data-ubicacion="tecnico"
+                      data-text="MALETA HERRAMIENTAS JORGE COY TECNICO"
+                    >
+                      <td><div class="tool-thumb"><span>JC</span></div></td>
+                      <td class="tool-name">
+                        Maleta herramientas manual
+                      </td>
+                      <td>General</td>
+                      <td>KIT-JC-01</td>
+                      <td>Con técnico</td>
+                      <td>Jorge Coy</td>
+                      <td>
+                        <ui-pill state="operando" label="Jorge Coy"></ui-pill>
+                      </td>
+                      <td>1 kit</td>
+                    </tr>
+
+                    <tr
+                      class="tool-row"
+                      data-state="indisponible"
+                      data-ubicacion="obras"
+                      data-text="ESCALERA FIBRA 8 PELDAÑOS INDISPONIBLE OBRA 123"
+                    >
+                      <td><div class="tool-thumb"><span>ES</span></div></td>
+                      <td class="tool-name">
+                        Escalera fibra 8 peldaños
+                      </td>
+                      <td>Acceso</td>
+                      <td>AC-008</td>
+                      <td>Obra #123 — Valencia</td>
+                      <td>Equipo obra</td>
+                      <td>
+                        <ui-pill
+                          state="baja"
+                          label="Indisponible"
+                        ></ui-pill>
+                      </td>
+                      <td>0 uds</td>
+                    </tr>
+
+                    <tr
+                      class="tool-row"
+                      data-state="devolucion"
+                      data-ubicacion="almacen"
+                      data-text="PINZA AMPERIMETRICA FLUKE 376 DEVOLUCION"
+                    >
+                      <td><div class="tool-thumb"><span>PA</span></div></td>
+                      <td class="tool-name">
+                        Pinza amperimétrica Fluke 376
+                      </td>
+                      <td>Medición</td>
+                      <td>HZ-055</td>
+                      <td>Almacén central</td>
+                      <td>Devolución cliente</td>
+                      <td>
+                        <ui-pill
+                          state="baja"
+                          label="Devolución"
+                        ></ui-pill>
+                      </td>
+                      <td>1 ud</td>
+                    </tr>
+
+                    <tr
+                      class="tool-row"
+                      data-state="solicitada"
+                      data-ubicacion="almacen"
+                      data-text="FUSIONADORA FIBRA OPTICA SOLICITADA OFICINA"
+                    >
+                      <td><div class="tool-thumb"><span>FS</span></div></td>
+                      <td class="tool-name">
+                        Fusionadora fibra óptica Inno View 7
+                      </td>
+                      <td>Fibra óptica</td>
+                      <td>FO-001</td>
+                      <td>Almacén central</td>
+                      <td>Solicitud oficina</td>
+                      <td>
+                        <ui-pill
+                          state="receso"
+                          label="Solicitada"
+                        ></ui-pill>
+                      </td>
+                      <td>2 uds</td>
+                    </tr>
+
+                    <!-- Mais exemplos para encher paginação -->
+                    <tr
+                      class="tool-row"
+                      data-state="tecnico"
+                      data-ubicacion="tecnico"
+                      data-text="MULTIMETRO FLUKE 117 TECNICO EDUARDO OLIVEIRA"
+                    >
+                      <td><div class="tool-thumb"><span>EO</span></div></td>
+                      <td class="tool-name">Multímetro Fluke 117</td>
+                      <td>Medición</td>
+                      <td>HZ-060</td>
+                      <td>Con técnico</td>
+                      <td>Eduardo Oliveira</td>
+                      <td>
+                        <ui-pill
+                          state="operando"
+                          label="Eduardo Oliveira"
+                        ></ui-pill>
+                      </td>
+                      <td>1 ud</td>
+                    </tr>
+
+                    <tr
+                      class="tool-row"
+                      data-state="furgo"
+                      data-ubicacion="furgo"
+                      data-text="MALETA BROCAS Y ACCESORIOS FURGONETA 2"
+                    >
+                      <td><div class="tool-thumb"><span>B2</span></div></td>
+                      <td class="tool-name">
+                        Maleta brocas y accesorios
+                      </td>
+                      <td>Perforación</td>
+                      <td>HZ-090</td>
+                      <td>Furgo #2</td>
+                      <td>Equipo obra</td>
+                      <td>
+                        <ui-pill state="operando" label="En furgo"></ui-pill>
+                      </td>
+                      <td>1 kit</td>
+                    </tr>
+
+                    <tr
+                      class="tool-row"
+                      data-state="por-recibir"
+                      data-ubicacion="almacen"
+                      data-text="MAQUINA CORTE RADIAL POR RECIBIR"
+                    >
+                      <td><div class="tool-thumb"><span>CR</span></div></td>
+                      <td class="tool-name">Máquina corte radial</td>
+                      <td>Corte</td>
+                      <td>HZ-091</td>
+                      <td>Almacén central</td>
+                      <td>ALMACÉN</td>
+                      <td>
+                        <ui-pill state="receso" label="Por recibir"></ui-pill>
+                      </td>
+                      <td>2 uds</td>
+                    </tr>
+
+                    <tr
+                      class="tool-row"
+                      data-state="taller"
+                      data-ubicacion="almacen"
+                      data-text="GENERADOR ELECTRICO TALLER REVISION"
+                    >
+                      <td><div class="tool-thumb"><span>GE</span></div></td>
+                      <td class="tool-name">Generador eléctrico 3kW</td>
+                      <td>Energía</td>
+                      <td>HZ-092</td>
+                      <td>Taller / revisión</td>
+                      <td>Servicio externo</td>
+                      <td>
+                        <ui-pill state="receso" label="Taller"></ui-pill>
+                      </td>
+                      <td>1 ud</td>
+                    </tr>
+
+                    <tr
+                      class="tool-row"
+                      data-state="indisponible"
+                      data-ubicacion="obras"
+                      data-text="TORRE ALUMINIO INDISPONIBLE SEGURIDAD"
+                    >
+                      <td><div class="tool-thumb"><span>TA</span></div></td>
+                      <td class="tool-name">Torre aluminio 4 m</td>
+                      <td>Acceso</td>
+                      <td>AC-010</td>
+                      <td>Obra #221 — Sueca</td>
+                      <td>Equipo obra</td>
+                      <td>
+                        <ui-pill
+                          state="baja"
+                          label="Indisponible"
+                        ></ui-pill>
+                      </td>
+                      <td>1 ud</td>
+                    </tr>
+
+                    <tr
+                      class="tool-row"
+                      data-state="devolucion"
+                      data-ubicacion="almacen"
+                      data-text="BATERIA LITIO DEVOLUCION PROVEEDOR"
+                    >
+                      <td><div class="tool-thumb"><span>BL</span></div></td>
+                      <td class="tool-name">Batería litio 18V</td>
+                      <td>Baterías</td>
+                      <td>BT-015</td>
+                      <td>Almacén central</td>
+                      <td>Devolución proveedor</td>
+                      <td>
+                        <ui-pill
+                          state="baja"
+                          label="Devolución"
+                        ></ui-pill>
+                      </td>
+                      <td>5 uds</td>
+                    </tr>
+
+                    <tr
+                      class="tool-row"
+                      data-state="solicitada"
+                      data-ubicacion="obras"
+                      data-text="ANDAMIO MOVIL SOLICITADA OBRA"
+                    >
+                      <td><div class="tool-thumb"><span>AM</span></div></td>
+                      <td class="tool-name">Andamio móvil</td>
+                      <td>Acceso</td>
+                      <td>AC-020</td>
+                      <td>Obra #310 — Valencia</td>
+                      <td>Jefe de obra</td>
+                      <td>
+                        <ui-pill
+                          state="receso"
+                          label="Solicitada"
+                        ></ui-pill>
+                      </td>
+                      <td>2 uds</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- FOOTER + PAGINAÇÃO -->
+              <footer class="tools-table-footer">
+                <span
+                  class="tools-footer-info"
+                  id="toolsFooterInfo"
+                >
+                  Mostrando 0 de 0 herramientas — Página 1 / 1
+                </span>
+
+                <div class="tools-pagination">
+                  <button
+                    class="pager-btn"
+                    type="button"
+                    id="toolsPrevPage"
+                    disabled
+                  >
+                    ‹ Anterior
+                  </button>
+                  <span
+                    class="tools-page-indicator"
+                    id="toolsPageIndicator"
+                  >
+                    Página 1 / 1
+                  </span>
+                  <button
+                    class="pager-btn"
+                    type="button"
+                    id="toolsNextPage"
+                    disabled
+                  >
+                    Siguiente ›
+                  </button>
+                </div>
+              </footer>
+            </section>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- JS da página -->
+    <script src="herramientas-panel.js"></script>
+  </body>
+</html>
